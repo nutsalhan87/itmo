@@ -1,0 +1,12 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 704px,
+  lg: 1210px,
+  xl: 1300px,
+  xxl: 1400px
+);
+
+@import '../node_modules/angular-notifier/styles.scss';
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import './app/target/target.component.scss';

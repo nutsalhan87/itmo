@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.Scene?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+<Scene xmlns="http://javafx.com/javafx/11.0.14-internal"
+       xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="gui.controllers.main.AuthorizingController"
+       stylesheets="@../../css/main.css">
+    <AnchorPane prefHeight="768" prefWidth="1024" styleClass="dagestan-background">
+        <BorderPane AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0">
+            <top>
+                <AnchorPane>
+                    <Button fx:id="languageButton" onAction="#openLanguageSelector" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10">
+                        <graphic>
+                            <ImageView fitWidth="25" preserveRatio="true">
+                                <Image url="@../../icons/globeIconBlack.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </AnchorPane>
+            </top>
+            <center>
+                <BorderPane maxHeight="270" maxWidth="380" styleClass="translucent-base">
+                    <top>
+                        <AnchorPane>
+                            <Button fx:id="backButton" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10"
+                                    onAction="#goBack" cancelButton="true" styleClass="transparent-button">
+                                <graphic>
+                                    <ImageView fitWidth="30" preserveRatio="true">
+                                        <Image url="@../../icons/leftArrow.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Label fx:id="authorizingLabel" AnchorPane.leftAnchor="80" AnchorPane.topAnchor="15"
+                                   styleClass="white-label"/>
+                        </AnchorPane>
+                    </top>
+                    <center>
+                        <VBox alignment="CENTER" spacing="30">
+                            <padding>
+                                <Insets bottom="40" left="40" right="40" top="40" />
+                            </padding>
+                            <TextField fx:id="portField" minHeight="50"/>
+                            <TextField fx:id="nameField" minHeight="50"/>
+                            <PasswordField fx:id="passwordField" minHeight="50"/>
+                            <Button minHeight="40" minWidth="70" onAction="#authorize" defaultButton="true">
+                                <graphic>
+                                    <ImageView fitWidth="20" preserveRatio="true">
+                                        <Image url="@../../icons/intoIcon.png"/>
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </VBox>
+                    </center>
+                </BorderPane>
+            </center>
+        </BorderPane>
+    </AnchorPane>
+</Scene>

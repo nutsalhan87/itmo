@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.Scene?>
+<Scene xmlns="http://javafx.com/javafx"
+       xmlns:fx="http://javafx.com/fxml"
+       fx:controller="gui.controllers.auxiliary.MessageController"
+       stylesheets="@../../css/main.css">
+    <BorderPane AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                styleClass="message">
+        <top>
+            <Button fx:id="closeWindowButton">
+                <padding>
+                    <Insets left="10" right="10" top="10" bottom="10"/>
+                </padding>
+                <graphic>
+                    <ImageView fitWidth="20" preserveRatio="true">
+                        <Image url="@../../icons/closeIcon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </top>
+        <center>
+            <ScrollPane fx:id="scrollPane" prefViewportWidth="590">
+                <TextFlow maxWidth="530">
+                    <Text fx:id="message"/>
+                </TextFlow>
+            </ScrollPane>
+        </center>
+        <left>
+            <AnchorPane>
+                <padding>
+                    <Insets left="5" right="5"/>
+                </padding>
+            </AnchorPane>
+        </left>
+        <right>
+            <AnchorPane>
+                <padding>
+                    <Insets left="5" right="5"/>
+                </padding>
+            </AnchorPane>
+        </right>
+        <bottom>
+            <AnchorPane>
+                <padding>
+                    <Insets top="10" bottom="10"/>
+                </padding>
+            </AnchorPane>
+        </bottom>
+    </BorderPane>
+</Scene>

@@ -1,0 +1,19 @@
+<div class="container">
+    <p class="text-center col display-4 py-4">Нуцалханов Нуцалхан - P32101 - Вариант 9</p>
+    <div class="row justify-content-center">
+        <div class="card col-12 col-md-8 col-lg-6">
+            <div class="card-body">
+                <div class="row justify-content-center gy-2">
+                    <div class="col-12">
+                        <input class="form-control" type="text" [(ngModel)]="username" placeholder="Имя пользователя" />
+                    </div>
+                    <div class="col-12">
+                        <input class="form-control" type="password" [(ngModel)]="password" placeholder="Пароль" />
+                    </div>
+                    <button class="btn btn-dark col-10 col-md-8 col-lg-6" (click)="signIn()">Войти</button>
+                    <button class="btn btn-dark col-10 col-md-8 col-lg-6" (click)="signUp()">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

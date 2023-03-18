@@ -1,0 +1,507 @@
+2023-03-18 22:59:53.563 [Thread-1] INFO  server.Session - Клиент подключился к серверу
+2023-03-18 22:59:53.608 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос на авторизацию или создание аккаунта.
+2023-03-18 22:59:53.623 [Thread-1] INFO  server.Account - Пользователь nutsalhan87 успешно авторизовался.
+2023-03-18 22:59:53.624 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 22:59:53.625 [pool-2-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 22:59:53.627 [pool-2-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 22:59:53.982 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 22:59:53.983 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 22:59:53.983 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 22:59:53.985 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 22:59:53.987 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 22:59:53.988 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 22:59:53.988 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 22:59:53.995 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 22:59:54.954 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 22:59:54.955 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 22:59:54.955 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 22:59:54.955 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 22:59:55.954 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 22:59:55.955 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 22:59:55.956 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 22:59:55.956 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 22:59:56.955 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 22:59:56.957 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 22:59:56.957 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 22:59:56.957 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 22:59:57.955 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 22:59:57.956 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 22:59:57.956 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 22:59:57.956 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 22:59:58.955 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 22:59:58.956 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 22:59:58.957 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 22:59:58.963 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 22:59:59.956 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 22:59:59.957 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 22:59:59.957 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 22:59:59.958 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:00.956 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:00.957 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:00.958 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:00.958 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:01.957 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:01.958 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:01.958 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:01.958 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:02.956 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:02.957 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:02.957 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:02.958 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:03.957 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:03.958 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:03.959 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:03.965 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:04.958 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:04.959 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:04.959 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:04.959 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:05.958 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:05.959 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:05.960 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:05.960 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:06.960 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:06.961 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:06.961 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:06.961 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:07.959 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:07.961 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:07.961 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:07.961 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:08.959 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:08.960 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:08.960 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:08.960 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:09.960 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:09.962 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:09.962 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:09.962 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:10.961 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:10.962 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:10.963 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:10.963 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:11.961 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:11.962 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:11.963 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:11.963 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:12.962 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:12.963 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:12.963 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:12.964 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:13.962 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:13.963 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:13.963 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:13.963 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:14.962 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:14.963 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:14.963 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:14.964 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:15.963 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:15.964 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:15.964 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:15.964 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:16.962 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:16.963 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:16.964 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:16.964 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:17.963 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:17.964 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:17.964 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:17.970 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:18.963 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:18.964 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:18.965 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:18.965 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:19.964 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:19.965 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:19.965 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:19.965 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:20.965 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:20.966 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:20.967 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:20.967 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:21.965 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:21.966 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:21.967 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:21.967 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:22.966 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:22.967 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:22.967 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:22.967 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:23.966 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:23.967 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:23.967 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:23.967 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:24.967 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:24.968 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:24.968 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:24.968 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:25.967 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:25.968 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:25.968 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:25.968 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:26.967 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:26.967 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:26.968 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:26.968 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:27.968 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:27.969 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:27.969 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:27.976 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:28.967 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:28.968 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:28.968 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:28.968 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:29.968 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:29.969 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:29.969 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:29.969 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:30.968 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:30.969 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:30.969 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:30.969 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:31.969 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:31.970 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:31.971 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:31.971 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:32.969 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:32.970 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:32.970 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:32.977 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:33.970 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:33.971 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:33.971 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:33.972 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:34.970 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:34.971 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:34.972 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:34.972 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:35.970 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:35.972 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:35.972 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:35.972 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:36.971 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:36.972 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:36.972 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:36.972 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:37.971 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:37.972 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:37.972 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:37.978 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:38.972 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:38.973 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:38.973 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:38.973 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:39.972 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:39.973 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:39.973 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:39.973 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:40.973 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:40.974 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:40.974 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:40.974 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:41.973 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:41.974 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:41.974 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:41.975 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:42.974 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:42.975 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:42.975 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:42.982 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:43.974 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:43.975 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:43.976 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:43.976 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:44.975 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:44.976 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:44.976 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:44.976 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:45.975 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:45.976 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:45.977 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:45.977 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:46.976 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:46.977 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:46.977 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:46.978 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:47.976 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:47.977 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:47.977 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:47.983 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:48.976 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:48.978 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:48.978 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:48.978 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:49.977 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:49.978 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:49.979 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:49.979 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:50.977 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:50.978 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:50.979 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:50.979 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:51.978 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:51.979 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:51.980 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:51.980 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:52.979 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:52.980 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:52.980 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:52.986 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:53.979 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:53.980 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:53.981 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:53.981 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:54.980 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:54.981 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:54.982 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:54.982 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:55.980 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:55.981 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:55.982 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:55.982 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:56.980 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:56.981 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:56.981 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:56.981 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:57.981 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:57.982 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:57.983 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:57.988 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:58.982 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:58.983 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:58.983 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:58.983 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:00:59.982 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:00:59.983 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:00:59.983 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:00:59.984 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:00.983 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:00.984 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:00.984 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:00.984 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:01.983 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:01.984 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:01.984 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:01.985 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:02.984 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:02.985 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:02.985 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:02.991 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:03.984 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:03.985 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:03.985 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:03.986 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:04.984 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:04.985 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:04.985 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:04.985 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:05.984 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:05.985 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:05.985 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:05.985 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:06.985 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:06.986 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:06.987 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:06.987 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:07.985 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:07.986 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:07.986 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:07.992 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:08.985 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:08.986 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:08.986 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:08.986 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:09.986 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:09.987 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:09.988 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:09.988 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:11.144 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:11.145 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:11.145 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:11.145 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:11.987 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:11.987 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:11.988 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:11.988 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:12.988 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:12.988 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:12.989 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:12.995 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:13.988 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:13.989 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:13.990 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:13.990 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:14.987 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:14.988 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:14.988 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:14.988 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:15.988 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:15.988 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:15.989 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:15.989 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:16.988 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:16.989 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:16.990 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:16.990 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:17.989 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:17.990 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:17.990 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:17.997 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:18.988 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:18.989 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:18.989 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:18.989 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:19.989 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:19.990 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:19.990 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:19.991 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:20.989 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:20.990 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:20.990 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:20.990 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:21.990 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:21.991 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:21.991 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:21.991 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:22.990 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:22.991 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:22.991 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:22.991 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:23.990 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:23.991 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:23.991 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:23.991 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:24.990 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:24.991 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:24.991 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:24.991 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:25.991 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:25.992 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:25.992 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:25.993 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:26.990 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:26.991 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:26.991 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:26.992 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:27.991 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:27.991 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:27.992 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:27.992 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:28.192 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:28.200 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:28.200 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:28.200 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:28.991 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:28.992 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:28.992 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:28.992 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:29.991 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:29.992 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:29.992 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:29.999 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:30.991 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:30.992 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:30.992 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:30.992 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:31.992 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:31.992 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:31.993 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:31.993 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:32.992 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:32.992 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:32.993 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:32.993 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:33.993 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:33.994 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:33.994 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:33.994 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:34.993 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:34.994 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:34.995 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:35.001 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:35.993 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:35.994 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:35.994 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:35.994 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:36.994 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:36.995 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:36.995 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:36.996 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:37.994 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:37.995 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:37.995 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:37.995 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:38.994 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:38.995 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:38.995 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:38.995 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:39.995 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:39.996 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:39.996 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:40.003 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:40.995 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:40.995 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:40.996 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:40.996 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:41.845 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:41.862 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:41.862 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:41.862 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:41.863 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:41.863 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:41.864 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:41.864 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:41.865 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:41.865 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:41.866 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:41.866 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:41.995 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:41.995 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:41.996 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:41.996 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:42.996 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:42.997 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:42.997 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:42.997 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:43.996 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:43.997 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:43.997 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:43.997 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:44.996 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:44.996 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:44.997 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:45.003 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:45.997 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:45.998 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:45.998 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:45.998 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:46.997 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:46.998 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:46.998 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:46.999 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:47.998 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:47.999 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:47.999 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:47.999 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:49.019 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:49.019 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:49.020 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:49.020 [pool-3-thread-1] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:50.009 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:50.010 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:50.010 [pool-3-thread-2] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:50.017 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:50.777 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:50.780 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:50.780 [pool-3-thread-3] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:50.780 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:50.998 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:50.999 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:51.000 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:51.000 [pool-3-thread-4] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:51.998 [ForkJoinPool-1-worker-1] INFO  server.GetRequest - Получен запрос от nutsalhan87.
+2023-03-18 23:01:51.999 [Thread-1] INFO  server.Session - Отправлен ответ клиенту.
+2023-03-18 23:01:51.999 [pool-3-thread-5] INFO  server.SendAnswer - Ответ успешно передан клиенту.
+2023-03-18 23:01:51.999 [Thread-1] INFO  server.Session - Запрос от клиента получен.
+2023-03-18 23:01:52.488 [Thread-1] ERROR server.Session - java.lang.RuntimeException: java.lang.RuntimeException: java.io.EOFException

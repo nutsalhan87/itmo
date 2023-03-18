@@ -1,0 +1,49 @@
+-- Table: public.routes
+
+-- DROP TABLE IF EXISTS public.routes;
+
+CREATE TABLE IF NOT EXISTS public.routes
+(
+    id integer NOT NULL DEFAULT nextval('serial'::regclass),
+    name text COLLATE pg_catalog."default" NOT NULL,
+    c_x double precision NOT NULL,
+    c_y double precision NOT NULL,
+    creation_date timestamp without time zone NOT NULL,
+    from_x double precision NOT NULL,
+    from_y double precision NOT NULL,
+    from_z double precision NOT NULL,
+    from_name text COLLATE pg_catalog."default" NOT NULL,
+    to_x integer NOT NULL,
+    to_y integer NOT NULL,
+    to_z double precision NOT NULL,
+    distance double precision NOT NULL,
+    owner text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT routes_pkey PRIMARY KEY (id),
+    CONSTRAINT routes_name_check CHECK (name <> ''::text),
+    CONSTRAINT routes_c_x_check CHECK (c_x > '-140'::integer::double precision),
+    CONSTRAINT routes_from_name_check CHECK (from_name <> ''::text),
+    CONSTRAINT routes_distance_check CHECK (distance > 1::double precision),
+    CONSTRAINT routes_owner_check CHECK (owner <> ''::text)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.routes
+    OWNER to postgres;
+
+-- Table: public.userdata
+
+-- DROP TABLE IF EXISTS public.userdata;
+
+CREATE TABLE IF NOT EXISTS public.userdata
+(
+    owner text COLLATE pg_catalog."default" NOT NULL,
+    password text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT userdata_owner_check CHECK (owner <> ''::text),
+    CONSTRAINT userdata_password_check CHECK (password <> ''::text)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.userdata
+    OWNER to postgres;

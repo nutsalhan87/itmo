@@ -1,0 +1,28 @@
+<svg id="coords" width="450" viewBox="0 0 600 600" height="450">
+    <rect class="shape" x="200" y="100" width="100" height="200"/>
+    <polygon class="shape" points="200,300 300,300 300,400"/>
+    <path class="shape" d="M300,300 L500,300 A200,200 1 0,1 300,500 z"/>
+    <line x1="300" y1="10" x2="300" y2="590"/>
+    <line y1="300" x1="10" y2="300" x2="590"/>
+    <polygon points="300,0 308,24 292,24"/>
+    <polygon points="576,292 600,300 576,308"/>
+    <line x1="292" x2="308" y1="100" y2="100"/>
+    <line x1="292" x2="308" y1="200" y2="200"/>
+    <line x1="292" x2="308" y1="400" y2="400"/>
+    <line x1="292" x2="308" y1="500" y2="500"/>
+    <line y1="292" y2="308" x1="100" x2="100"/>
+    <line y1="292" y2="308" x1="200" x2="200"/>
+    <line y1="292" y2="308" x1="400" x2="400"/>
+    <line y1="292" y2="308" x1="500" x2="500"/>
+    <text x="320" y="24">y</text>
+    <text x="576" y="280">x</text>
+    <text x="320" y="110">R</text>
+    <text x="320" y="210">R/2</text>
+    <text x="320" y="410">-R/2</text>
+    <text x="320" y="510">-R</text>
+    <text x="90" y="280">-R</text>
+    <text x="180" y="280">-R/2</text>
+    <text x="385" y="280">R/2</text>
+    <text x="495" y="280">R</text>
+    <circle id="real-point" cx="-10" cy="-10" r="10"/>
+</svg>

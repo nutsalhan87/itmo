@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.14-internal"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="gui.controllers.auxiliary.LanguageController"
+      spacing="15"
+      stylesheets="@../../css/main.css" styleClass="popup">
+    <padding>
+        <Insets left="10" right="10" top="10" bottom="10"/>
+    </padding>
+    <RadioButton fx:id="russianButton" onAction="#selectLanguage">
+        <toggleGroup>
+            <ToggleGroup fx:id="languageToggleGroup"/>
+        </toggleGroup>
+    </RadioButton>
+    <RadioButton fx:id="norwegianButton" onAction="#selectLanguage">
+        <toggleGroup>
+            <fx:reference source="languageToggleGroup"/>
+        </toggleGroup>
+    </RadioButton>
+    <RadioButton fx:id="italianButton" onAction="#selectLanguage">
+        <toggleGroup>
+            <fx:reference source="languageToggleGroup"/>
+        </toggleGroup>
+    </RadioButton>
+    <RadioButton fx:id="spanishButton" onAction="#selectLanguage">
+        <toggleGroup>
+            <fx:reference source="languageToggleGroup"/>
+        </toggleGroup>
+    </RadioButton>
+</VBox>

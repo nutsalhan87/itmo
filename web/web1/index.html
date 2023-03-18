@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB ONE</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body onload="getTable()">
+    <table id="main-table">
+        <tr>
+            <td class="center-align" colspan="2">
+                <h1>Нуцалханов Нуцалхан P32101. Вариант - 1116</h1>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="6" class="right-align">
+                <svg id="coords" height="375" width="375">
+                    <rect class="shape" x="188" y="188" width="63" height="125" />
+                    <polygon class="shape" points="63,188 188,188 188,313" />
+                    <path class="shape" d="M188,188 L188,63 A125,125 1 0,1 313,188 z" />
+                    <line x1="188" y1="5" x2="188" y2="370" />
+                    <line y1="188" x1="5" y2="188" x2="370" />
+                    <polygon points="188,0 195,15  181,15" />
+                    <polygon points="375,188 360,195  360,181" />
+                    <line x1="184" x2="192" y1="63" y2="63" />
+                    <line x1="184" x2="192" y1="125" y2="125" />
+                    <line x1="184" x2="192" y1="250" y2="250" />
+                    <line x1="184" x2="192" y1="313" y2="313" />
+                    <line y1="184" y2="192" x1="63" x2="63" />
+                    <line y1="184" y2="192" x1="125" x2="125" />
+                    <line y1="184" y2="192" x1="250" x2="250" />
+                    <line y1="184" y2="192" x1="313" x2="313" />
+                    <text x="200" y="15">y</text>
+                    <text x="360" y="176">x</text>
+                    <text x="200" y="68">R</text>
+                    <text x="200" y="130">R/2</text>
+                    <text x="200" y="255">-R/2</text>
+                    <text x="200" y="318">-R</text>
+                    <text x="53" y="176">-R</text>
+                    <text x="110" y="176">-R/2</text>
+                    <text x="240" y="176">R/2</text>
+                    <text x="308" y="176">R</text>
+                    <circle id="point" cx="-10" cy="-10" r="5" />
+                </svg>
+            </td>
+            <td class="tall-cell"></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="X">Выберите X</label>
+                <fieldset id="X">
+                    <input type="radio" name="X" value="-5" /><span>-5</span>
+                    <input type="radio" name="X" value="-4" /><span>-4</span>
+                    <input type="radio" name="X" value="-3" /><span>-3</span>
+                    <input type="radio" name="X" value="-2" /><span>-2</span>
+                    <input type="radio" name="X" value="-1" /><span>-1</span>
+                    <input type="radio" name="X" value="0" /><span>0</span>
+                    <input type="radio" name="X" value="1" /><span>1</span>
+                    <input type="radio" name="X" value="2" /><span>2</span>
+                    <input type="radio" name="X" value="3" /><span>3</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="Y">Задайте Y</label> <br>
+                <input type="text" id="Y" placeholder="(-5; 5)" onchange="validateTextForm()" maxlength="7"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="R">Выберите R</label>
+                <fieldset id="R">
+                    <input type="button" value="1" onclick="setR(1)">
+                    <input type="button" value="1.5" onclick="setR(1.5)">
+                    <input type="button" value="2" onclick="setR(2)">
+                    <input type="button" value="2.5" onclick="setR(2.5)">
+                    <input type="button" value="3" onclick="setR(3)">
+                </fieldset>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button onclick="submit()">Отправить</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="tall-cell"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table id="result-table">
+                    <thead>
+                        <tr>
+                            <th id="time-column">Время</th>
+                            <th>Время обработки</th>
+                            <th>X</th>
+                            <th>Y</th>
+                            <th>R</th>
+                            <th>Попал?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="result-table-body">
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <script src="script.js"></script>
+</body>
+
+</html>

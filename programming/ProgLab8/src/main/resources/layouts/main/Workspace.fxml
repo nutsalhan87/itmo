@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<?import gui.FilteredTableColumn?>
+<Scene xmlns="http://javafx.com/javafx/11.0.14-internal"
+       xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="gui.controllers.main.WorkspaceController"
+       stylesheets="@../../css/main.css">
+    <AnchorPane fx:id="mainAnchor" styleClass="dark-dagestan-background">
+        <BorderPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <top>
+                <HBox fx:id="topButtonBar" opacity="0.9">
+                    <Button fx:id="userButton" maxWidth="Infinity" onAction="#openUserMenu"
+                            HBox.hgrow="ALWAYS" styleClass="transparent-button">
+                        <graphic>
+                            <ImageView fitWidth="25" preserveRatio="true">
+                                <Image url="@../../icons/userIcon.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="scriptButton" maxWidth="Infinity" onAction="#openScriptExecutor" prefHeight="50"
+                            HBox.hgrow="ALWAYS" styleClass="transparent-button">
+                        <graphic>
+                            <ImageView fitWidth="25" preserveRatio="true">
+                                <Image url="@../../icons/scriptIcon.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="visualizationButton" maxWidth="Infinity" onAction="#openVisualization"
+                            prefHeight="50" HBox.hgrow="ALWAYS" styleClass="transparent-button">
+                        <graphic>
+                            <ImageView fitWidth="25" preserveRatio="true">
+                                <Image url="@../../icons/mapPoint.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="languageButton" maxWidth="Infinity" onAction="#openLanguageSelector" prefHeight="50"
+                            HBox.hgrow="ALWAYS" styleClass="transparent-button">
+                        <graphic>
+                            <ImageView fitWidth="25" preserveRatio="true">
+                                <Image url="@../../icons/globeIconWhite.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </top>
+            <center>
+                <VBox>
+                    <AnchorPane fx:id="tableHeader">
+                        <Label fx:id="tableHeading" AnchorPane.leftAnchor="30" AnchorPane.topAnchor="5" styleClass="white-label"/>
+                        <HBox AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
+                            <Button onAction="#getInfo" prefHeight="40"
+                                    styleClass="transparent-button">
+                                <graphic>
+                                    <ImageView fitWidth="20" preserveRatio="true">
+                                        <Image url="@../../icons/infoIcon.png" />
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button onAction="#openRemoveMenu" prefHeight="40"
+                                    styleClass="transparent-button">
+                                <graphic>
+                                    <ImageView fitWidth="20" preserveRatio="true">
+                                        <Image url="@../../icons/trashIconWhite.png" />
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button onAction="#openAddMenu" prefHeight="40"
+                                    styleClass="transparent-button">
+                                <graphic>
+                                    <ImageView fitWidth="20" preserveRatio="true">
+                                        <Image url="@../../icons/uploadIcon.png" />
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button onAction="#refreshData" prefHeight="40"
+                                    styleClass="transparent-button">
+                                <graphic>
+                                    <ImageView fitWidth="20" preserveRatio="true">
+                                        <Image url="@../../icons/refreshIcon.png" />
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                            <Button onAction="#resetFilters" prefHeight="40"
+                                    styleClass="transparent-button">
+                                <graphic>
+                                    <ImageView fitWidth="20" preserveRatio="true">
+                                        <Image url="@../../icons/resetFiltersIcon.png" />
+                                    </ImageView>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </AnchorPane>
+                    <TableView fx:id="table" VBox.vgrow="ALWAYS" maxHeight="Infinity">
+                        <columns>
+                            <FilteredTableColumn fx:id="idColumn" text="id"/>
+                            <FilteredTableColumn fx:id="nameColumn"/>
+                            <FilteredTableColumn fx:id="xColumn" text="X"/>
+                            <FilteredTableColumn fx:id="yColumn" text="Y"/>
+                            <FilteredTableColumn fx:id="dateColumn"/>
+                            <FilteredTableColumn fx:id="fromXColumn"/>
+                            <FilteredTableColumn fx:id="fromYColumn"/>
+                            <FilteredTableColumn fx:id="fromZColumn"/>
+                            <FilteredTableColumn fx:id="fromNameColumn"/>
+                            <FilteredTableColumn fx:id="toXColumn"/>
+                            <FilteredTableColumn fx:id="toYColumn"/>
+                            <FilteredTableColumn fx:id="toZColumn"/>
+                            <FilteredTableColumn fx:id="distanceColumn"/>
+                            <FilteredTableColumn fx:id="ownerColumn"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </center>
+            <left>
+                <AnchorPane>
+                    <padding>
+                        <Insets left="10" right="10" />
+                    </padding>
+                </AnchorPane>
+            </left>
+            <right>
+                <AnchorPane>
+                    <padding>
+                        <Insets left="10" right="10" />
+                    </padding>
+                </AnchorPane>
+            </right>
+        </BorderPane>
+    </AnchorPane>
+</Scene>

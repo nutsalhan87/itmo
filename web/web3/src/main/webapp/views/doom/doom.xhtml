@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+   <title>Websockets Doom</title>
+   <link rel="stylesheet" href="doom.css"/>
+   <meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body>
+   <div id="container" class="noselect">
+      <canvas class="frame" id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
+      <p>
+         Controls: <br/>
+         WASD - walk, <br/>
+         Q - turn left, E - turn right, <br/>
+         Hold Shift - run + faster turning, <br/>
+         R - user (for example, buttons or doors), <br/>
+         Space - fire, <br/>
+         Numbers - choose weapon
+      </p>
+      <form action="#{facesContext.externalContext.requestContextPath}/views/hub.xhtml" method="get">
+         <input type="submit" value="Back to hub"/>
+      </form>
+   </div>
+   <script type="text/javascript" src="doom.js"></script>
+   <script type="text/javascript" src="websockets-doom.js"></script>
+</body>
+</html>

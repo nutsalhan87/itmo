@@ -1,0 +1,98 @@
+[
+  {
+    "Route":
+      {
+      "id": 1,
+      "name": "WAY1",
+      "coordinates": 
+      {
+        "x": 4123.0,
+        "y": 42341
+      },
+      "distance": 123.0,
+      "first_location":
+       {
+        "Location":
+        {
+          "x": 1234.0,
+          "y": 1234,
+          "z": 432.0,
+          "name": "ITMO"
+        }
+      },
+      "second_location": 
+       {
+        "Location":
+        {
+          "x": 3123,
+          "y": 4123,
+          "z": 233.0
+        }
+      }
+    }
+  },
+  {
+    "Route":
+      {
+      "id": 3,
+      "name": "AAAA",
+      "coordinates": 
+      {
+        "x": 11.0,
+        "y": 1
+      },
+      "distance": 123.0,
+      "first_location": 
+       {
+        "Location":
+        {
+          "x": 1.0,
+          "y": 1,
+          "z": 1.0,
+          "name": "AAAAAAAAAA"
+        }
+      },
+      "second_location": 
+       {
+        "Location":
+        {
+          "x": 1,
+          "y": 1,
+          "z": 1.0
+        }
+      }
+    }
+  },
+  {
+    "Route":
+      {
+      "id": 4,
+      "name": "2",
+      "coordinates": 
+      {
+        "x": 2.0,
+        "y": 2
+      },
+      "distance": 2.0,
+      "first_location": 
+       {
+        "Location":
+        {
+          "x": 2.0,
+          "y": 2,
+          "z": 2.0,
+          "name": "2"
+        }
+      },
+      "second_location": 
+       {
+        "Location":
+        {
+          "x": 2,
+          "y": 2,
+          "z": 2.0
+        }
+      }
+    }
+  }
+]

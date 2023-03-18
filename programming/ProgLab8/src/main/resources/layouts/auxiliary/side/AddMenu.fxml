@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="gui.controllers.auxiliary.side.AddMenuController"
+            prefWidth="600.0"
+            stylesheets="@../../../css/main.css" styleClass="side-menu">
+    <BorderPane AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
+        <top>
+            <Button fx:id="closeMenuButton" cancelButton="true">
+                <padding>
+                    <Insets left="10" right="10" top="10" bottom="10"/>
+                </padding>
+                <graphic>
+                    <ImageView fitWidth="20" preserveRatio="true">
+                        <Image url="@../../../icons/closeIcon.png"/>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </top>
+        <center>
+            <GridPane hgap="100">
+                <padding>
+                    <Insets left="10" right="10" top="10" bottom="10"/>
+                </padding>
+
+                <Label fx:id="nameLabel" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                           GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS"/>
+
+                <Label text="X" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="xField" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+
+                <Label text="Y" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="yField" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+
+                <Label fx:id="fromXLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="fromXField" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+
+                <Label fx:id="fromYLabel" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="fromYField" GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+
+                <Label fx:id="fromZLabel" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id="fromZField" GridPane.rowIndex="5" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+
+                <Label fx:id="fromNameLabel" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <TextField fx:id="fromNameField" GridPane.rowIndex="6" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+
+                <Label fx:id="toXLabel" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <TextField fx:id="toXField" GridPane.rowIndex="7" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+
+                <Label fx:id="toYLabel" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <TextField fx:id="toYField" GridPane.rowIndex="8" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+
+                <Label fx:id="toZLabel" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                <TextField fx:id="toZField" GridPane.rowIndex="9" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+
+                <Label fx:id="distanceLabel" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <TextField fx:id="distanceField" GridPane.rowIndex="10" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS"/>
+            </GridPane>
+        </center>
+        <left>
+            <AnchorPane>
+                <padding>
+                    <Insets left="5" right="5"/>
+                </padding>
+            </AnchorPane>
+        </left>
+        <right>
+            <AnchorPane>
+                <padding>
+                    <Insets left="5" right="5"/>
+                </padding>
+            </AnchorPane>
+        </right>
+        <bottom>
+            <HBox spacing="100" alignment="CENTER">
+                <padding>
+                    <Insets bottom="30"/>
+                </padding>
+                <Button fx:id="sendButton" defaultButton="true" onAction="#sendRoute" styleClass="green-button"/>
+                <RadioButton fx:id="ifMaxButton" wrapText="true" maxWidth="250"/>
+            </HBox>
+        </bottom>
+    </BorderPane>
+</AnchorPane>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<Scene xmlns="http://javafx.com/javafx/11.0.14-internal"
+       xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="gui.controllers.main.VisualizationController"
+       stylesheets="@../../css/main.css">
+    <AnchorPane fx:id="mainAnchor">
+        <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <StackPane>
+                <ImageView fx:id="dagestanBackground" preserveRatio="true"/>
+                <AnchorPane fx:id="poiMap"/>
+            </StackPane>
+            <BorderPane fx:id="rightSide" HBox.hgrow="ALWAYS">
+                <top>
+                    <AnchorPane fx:id="visualizationHeader">
+                        <Button fx:id="backButton" alignment="BASELINE_LEFT" cancelButton="true" onAction="#goBack"
+                                AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="15" AnchorPane.topAnchor="15"
+                                styleClass="transparent-button">
+                            <graphic>
+                                <ImageView fitWidth="25" preserveRatio="true">
+                                    <Image url="@../../icons/leftArrow.png"/>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </AnchorPane>
+                </top>
+                <center>
+                    <AnchorPane>
+                        <Button onAction="#editOrRemove" styleClass="green-button"
+                                AnchorPane.bottomAnchor="15" AnchorPane.leftAnchor="15" prefWidth="50" prefHeight="50">
+                            <graphic>
+                                <ImageView fitWidth="30" preserveRatio="true">
+                                    <Image url="@../../icons/editIcon.png"/>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Label fx:id="ownerAndCreationDateLabel" nodeOrientation="RIGHT_TO_LEFT" AnchorPane.bottomAnchor="15" AnchorPane.rightAnchor="15" />
+                        <VBox spacing="15" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                            <padding>
+                                <Insets left="15" right="15" />
+                            </padding>
+                            <Label fx:id="nameLabelVisualization" wrapText="true"/>
+                            <VBox maxWidth="Infinity" spacing="5">
+                                <Label fx:id="fromLabelVisualization" wrapText="true" />
+                                <Label fx:id="fromNameLabelVisualization" wrapText="true" />
+                            </VBox>
+                            <Label fx:id="toLabelVisualization" wrapText="true" />
+                            <Label fx:id="distanceLabelVisualization" wrapText="true" />
+                        </VBox>
+                    </AnchorPane>
+                </center>
+            </BorderPane>
+        </HBox>
+    </AnchorPane>
+</Scene>

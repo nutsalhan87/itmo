@@ -1,0 +1,226 @@
+@font-face {
+    font-family: Montserrat;
+    src: url('../font/Montserrat-Regular.ttf') format('truetype');
+}
+
+.text {
+    -fx-font-family: Montserrat;
+    -fx-font-smoothing-type: gray;
+}
+
+.white-label {
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 6;
+    -fx-font-size: 18;
+    -fx-text-fill: #4A4A4A;
+}
+
+.button:hover {
+    -fx-background-color: #E0E0E0;
+}
+
+.button:pressed {
+    -fx-background-color: #E0E0E0;
+    -fx-effect: innershadow(gaussian, gray, 10, 0, 0, 0);
+}
+
+.red-button {
+    -fx-background-color: #EC6767;
+    -fx-background-radius: 8;
+}
+
+.red-button:hover {
+    -fx-background-color: #D65757;
+}
+
+.red-button:pressed {
+    -fx-background-color: #D65757;
+    -fx-effect: innershadow(gaussian, red, 5, 0, 0, 0);
+}
+
+.green-button {
+    -fx-background-color: #74DD91;
+    -fx-background-radius: 8;
+}
+
+.green-button:hover {
+    -fx-background-color: #64CD81;
+}
+
+.green-button:pressed {
+    -fx-background-color: #64CD81;
+    -fx-effect: innershadow(gaussian, green, 5, 0, 0, 0);
+}
+
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 18;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+}
+
+.transparent-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+}
+
+.transparent-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-effect: none;
+}
+
+.dagestan-background {
+    -fx-background-image: url("../images/dagestan.png");
+    -fx-background-size: cover;
+}
+
+.dark-dagestan-background {
+    -fx-background-image: url("../images/darkDagestan.png");
+    -fx-background-size: cover;
+}
+
+.translucent-base {
+    -fx-background-color: rgba(173, 205, 174, 0.75);
+    -fx-background-radius: 8;
+    -fx-font-size: 24;
+}
+
+.text-field {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 6;
+    -fx-border-color: #BABABA;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+}
+
+.text-field:focused {
+    -fx-effect: innershadow(gaussian, gray, 6, 0, 0, 0);
+}
+
+.popup {
+    -fx-background-color: #FAFAFA;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, gray, 5, 0, 0, 0);
+}
+
+.radio {
+    -fx-background-color: #FAFAFA;
+    -fx-border-color: #A3A3A3;
+    -fx-border-width: 2;
+    -fx-border-radius: 100%;
+}
+
+.side-menu {
+    -fx-background-color: #FAFAFA;
+}
+
+.message {
+    -fx-background-color: #F4F4F4;
+    -fx-background-radius: 8;
+    -fx-font-size: 24;
+    -fx-effect: dropshadow(gaussian, gray, 15, 0, 0, 0);
+}
+
+.message > .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.table-view {
+    -fx-background-color: rgba(244, 244, 244, 0.9);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: rgba(204, 204, 204, 0.9);
+}
+
+.table-view .table-cell {
+    -fx-border-color: rgba(204, 204, 204, 0.7);
+}
+
+.table-row-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:even {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(204, 204, 204, 0.9);
+    -fx-text-background-color: black;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar:horizontal .thumb,
+.table-view .virtual-flow .scroll-bar:vertical .thumb {
+    -fx-background-color: #FAFAFA;
+}
+
+.poi {
+    -fx-effect: dropshadow(three-pass-box, dimgray, 15, 0.3, 0, 0);
+}
+
+#backButton {
+    -fx-background-radius: 6;
+}
+
+#welcomeLabel {
+    -fx-background-color: rgba(35, 150, 60, 0.7);
+    -fx-background-radius: 8;
+    -fx-font-size: 24;
+    -fx-text-fill: white;
+    -fx-padding: 30, 30, 30, 30;
+}
+
+#closeMenuButton:pressed, #closeWindowButton:pressed {
+    -fx-effect: none;
+}
+
+#topButtonBar {
+    -fx-background-color: rgba(73, 124, 75, 0.9);
+}
+
+#topButtonBar > .button {
+    -fx-pref-height: 60;
+}
+
+#tableHeader {
+    -fx-background-color: rgba(146, 188, 142, 0.8);
+    -fx-font-size: 26;
+    -fx-padding: 5, 0, 5, 0;
+}
+
+#visualizationHeader {
+    -fx-background-color: #92BC8E;
+}
+
+#fromLabelVisualization, #fromNameLabelVisualization, #toLabelVisualization, #distanceLabelVisualization {
+    -fx-font-size: 32;
+}
+
+#nameLabelVisualization {
+    -fx-font-size: 60;
+}

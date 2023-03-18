@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>WEB GABE NEWELL</title>
+    <h:outputStylesheet name="main.css"/>
+    <h:outputStylesheet name="hub.css"/>
+</h:head>
+<h:body onload="setInterval(doClock, 13000)">
+    <h:panelGrid id="hello" columns="1">
+        <h:outputLabel value="Нуцалханов Нуцалхан Гасанович - P32101 - Вариант 1001"/>
+        <h:outputLabel id="clock" value="#{clock.clock}">
+            <f:ajax event="click" render="@this"/>
+        </h:outputLabel>
+        <h:form>
+            <h:commandButton action="shotgame?faces-redirect=true" value="Играть в ShotGame"/>
+        </h:form>
+        <h:form>
+            <h:commandButton action="#{doom.redirect}" value="Играть в Дум"/>
+        </h:form>
+    </h:panelGrid>
+    <h:outputScript name="hub.js"/>
+</h:body>
+</html>

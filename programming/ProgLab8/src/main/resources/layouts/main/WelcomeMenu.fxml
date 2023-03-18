@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<Scene xmlns="http://javafx.com/javafx/11.0.14-internal"
+       xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="gui.controllers.main.WelcomeMenuController"
+       onKeyTyped="#shortcutAction"
+       stylesheets="@../../css/main.css">
+    <AnchorPane prefHeight="768" prefWidth="1024" styleClass="dagestan-background">
+        <BorderPane AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0">
+            <top>
+                <AnchorPane>
+                    <Button fx:id="languageButton" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10"
+                            onAction="#openLanguageSelector">
+                        <graphic>
+                            <ImageView fitWidth="25" preserveRatio="true">
+                                <Image url="@../../icons/globeIconBlack.png"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </AnchorPane>
+            </top>
+            <center>
+                <VBox alignment="CENTER" spacing="80">
+                    <StackPane>
+                        <Label fx:id="welcomeLabel" alignment="CENTER"/>
+                    </StackPane>
+                    <VBox alignment="CENTER" maxHeight="270" maxWidth="380" spacing="50" styleClass="translucent-base">
+                        <padding>
+                            <Insets bottom="40" left="40" right="40" top="40" />
+                        </padding>
+                        <Button fx:id="logIn" alignment="CENTER" contentDisplay="CENTER"
+                                prefHeight="70" prefWidth="280" onAction="#logIn"/>
+                        <Button fx:id="register" alignment="CENTER" contentDisplay="CENTER"
+                                prefHeight="70" prefWidth="280" onAction="#register"/>
+                    </VBox>
+                </VBox>
+            </center>
+        </BorderPane>
+    </AnchorPane>
+</Scene>

@@ -1,0 +1,69 @@
+<nav class="navbar bg-body-tertiary py-2">
+    <div class="container-fluid">
+        <div class="p-1">
+            <button class="btn btn-outline-danger" (click)="exit()">Выйти</button>
+        </div>
+    </div>
+</nav>
+<div class="position-relative my-4">
+    <div class="container">
+        <div class="row justify-content-center gy-4">
+            <target class="col-12 col-md-6 text-center"></target>
+            <div class="col-12 col-md-6">
+                <div class="row justify-content-center gy-4">
+                    <div class="col-12">
+                        <label class="form-label" for="x-input">X</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="x-input" [(ngModel)]="x"
+                                placeholder="(-5; 5)" />
+                            <span class="input-group-text">{{x}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" for="y-input">Y</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="y-input" [(ngModel)]="y"
+                                placeholder="(-5; 3)" />
+                            <span class="input-group-text">{{y}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" for="r-input">R</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="r-input" [(ngModel)]="r" placeholder="(0; 5)" />
+                            <span class="input-group-text">{{r}}</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" (click)="sendShot()">Отправить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Время обработки</th>
+                            <th>X</th>
+                            <th>Y</th>
+                            <th>R</th>
+                            <th>Попал???</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let shot of shots">
+                            <td>{{shot.date}}</td>
+                            <td>{{shot.time}} мкс</td>
+                            <td>{{shot.x}}</td>
+                            <td>{{shot.y}}</td>
+                            <td>{{shot.r}}</td>
+                            <td *ngIf="shot.result">ДА!!!</td>
+                            <td *ngIf="!shot.result">НЕТ(((</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

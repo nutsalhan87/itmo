@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "projects": {
+      "web4frontend": {
+        "projectType": "application",
+        "root": "",
+        "sourceRoot": "src",
+        "architect": {
+          "build": {
+            "builder": "@angular-devkit/build-angular:browser",
+            "options": {
+              "outputPath": "dist/web4frontend",
+              "index": "src/index.html",
+              "main": "src/main.ts",
+              "polyfills": "src/polyfills.ts",
+              "tsConfig": "tsconfig.json",
+              "aot": true,
+              "styles": [
+                {
+                  "input": "src/styles.scss"
+                }
+              ],
+              "assets": [
+                "src/assets"
+              ]
+            }
+          },
+          "serve": {
+            "builder": "@angular-devkit/build-angular:dev-server",
+            "options": {
+              "browserTarget": "web4frontend:build",
+              "proxyConfig": "proxy.conf.json"
+            }
+          }
+        }
+      }},
+    "defaultProject": "web4frontend"
+  }

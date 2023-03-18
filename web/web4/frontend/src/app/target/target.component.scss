@@ -1,0 +1,34 @@
+#coords {
+    font-size: large;
+}
+
+line {
+    stroke: $body-color-dark;
+    stroke-width: 3px;
+}
+
+polygon {
+    fill: $body-color-dark;
+    stroke: $body-color-dark;
+}
+
+text {
+    fill: $body-color-dark;
+}
+
+.shape {
+    fill: $body-tertiary-bg-dark;
+    stroke-width: 0;
+}
+
+#real-point {
+    fill: $light;
+}
+
+.red-point {
+    fill: $danger;
+}
+
+.green-point {
+    fill: $success;
+}

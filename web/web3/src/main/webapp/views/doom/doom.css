@@ -1,0 +1,62 @@
+:root {
+    --main-color: #2D2424;
+    --border-color: #4d3428;
+    --element-color: #2D2424;
+    --dark-element-color: #B85C38;
+    --text-color: #E0C097;
+    --shape-color: #5C3D2E;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Open Sans", serif;
+    font-size: large;
+    color: var(--text-color);
+}
+
+body {
+    background-color: #111;
+    margin: 0;
+    padding: 2ch;
+    /* vietnamese */
+}
+
+#container {
+    max-width: 930px;
+    margin: auto;
+}
+
+.frame {
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+/* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+canvas.frame {
+    background-color: black;
+    width: 800px;
+    height: 600px;
+}
+
+input[type="submit"] {
+    background-color: var(--element-color);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 8px 12px 8px 12px;
+    min-width: 25px;
+    color: var(--text-color);
+    transition: 0.1s;
+}
+
+input[type="submit"]:hover {
+    transform: scale(1.2);
+}
+
+input[type="submit"]:active {
+    transform: scale(0.8);
+}

@@ -1,0 +1,85 @@
+#coords {
+    font-size: larger;
+    transition: 0.1s;
+    padding: 20px;
+}
+
+#coords:hover {
+    transform: scale(1.1);
+}
+
+#result-table {
+    margin: 25px auto 0 auto;
+    text-align: center;
+    border-top: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+#result-table th {
+    padding: 2px 45px;
+}
+
+#coord-form\:R_input {
+    color: var(--text-color);
+}
+
+#coord-form\:R_input:hover {
+    border-color: var(--border-color);
+}
+
+a.ui-spinner-button {
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 12px;
+}
+
+a.ui-spinner-button:hover {
+    background-color: var(--border-color);
+    border-color: transparent;
+}
+
+.ui-icon-triangle-1-n, .ui-icon-triangle-1-s {
+    color: var(--text-color);
+}
+
+svg line {
+    stroke: var(--text-color);
+    stroke-width: 3px;
+}
+
+svg polygon {
+    fill: var(--text-color);
+    stroke: var(--text-color);
+}
+
+svg text {
+    fill: var(--text-color);
+}
+
+.shape {
+    fill: var(--shape-color);
+    stroke-width: 0;
+}
+
+#real-point {
+    fill: var(--dark-element-color);
+}
+
+#flex-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#back-button {
+    margin-left: 1em;
+}
+
+.red-point {
+    fill: #cd0005;
+}
+
+.green-point {
+    fill: #37cd33;
+}

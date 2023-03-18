@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="gui.controllers.auxiliary.UserMenuController"
+      alignment="CENTER" spacing="15"
+      stylesheets="@../../css/main.css" styleClass="popup">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+    <Button fx:id="removeElementsButton" onAction="#removeAllUsersElements" wrapText="true" >
+        <graphic>
+            <ImageView fitWidth="15" preserveRatio="true">
+                <Image url="@../../icons/trashIconBlack.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button fx:id="exitButton">
+        <graphic>
+            <ImageView fitWidth="15" preserveRatio="true">
+                <Image url="@../../icons/exitIcon.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+</VBox>

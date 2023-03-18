@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="ru">
+<h:head>
+    <h:outputStylesheet name="main.css"/>
+    <h:outputStylesheet name="shotgame.css"/>
+    <h:outputScript name="shotgame.js"/>
+</h:head>
+<h:body onload="initDocument()">
+    <h:form id="back-button">
+        <h:commandButton action="hub?faces-redirect=true" value="Назад в хаб"/>
+    </h:form>
+    <h:panelGroup id="flex-group" layout="block">
+        <ui:include src="../resources/target.svg"/>
+        <h:form id="coord-form">
+            <h:panelGrid columns="1">
+                <h:outputLabel>Выберите X</h:outputLabel>
+                <h:selectOneRadio id="X" value="#{coordinates.x}" required="true">
+                    <f:selectItem itemValue="-2" itemLabel="-2"/>
+                    <f:selectItem itemValue="-1.5" itemLabel="-1.5"/>
+                    <f:selectItem itemValue="-1" itemLabel="-1"/>
+                    <f:selectItem itemValue="-0.5" itemLabel="-0.5"/>
+                    <f:selectItem itemValue="0" itemLabel="0"/>
+                    <f:selectItem itemValue="0.5" itemLabel="0.5"/>
+                    <f:selectItem itemValue="1" itemLabel="1"/>
+                    <f:selectItem itemValue="1.5" itemLabel="1.5"/>
+                    <f:selectItem itemValue="2" itemLabel="2"/>
+                    <f:ajax event="valueChange" execute="@this" render="@this"/>
+                </h:selectOneRadio>
+                <h:outputLabel>Выберите Y</h:outputLabel>
+                <h:inputText id="Y" value="#{coordinates.y}" required="true">
+                    <f:validateDoubleRange minimum="-3" maximum="3"/>
+                    <f:ajax event="valueChange" execute="@this" render="@this"/>
+                </h:inputText>
+                <h:outputLabel>Выберите R</h:outputLabel>
+                <p:spinner id="R" value="#{coordinates.r}" required="true" min="0.1" max="3.0" stepFactor="0.1"
+                           rotate="true" styleClass="text-left">
+                    <f:ajax event="valueChange" execute="@this" render="@this"/>
+                </p:spinner>
+                <h:commandButton id="submit-button" value="Отправить" action="#{shotHistory.processAndAddShot}">
+                    <f:ajax execute="@form" render="result-table" onevent="drawLastPointInTable"/>
+                </h:commandButton>
+            </h:panelGrid>
+        </h:form>
+    </h:panelGroup>
+    <h:dataTable id="result-table" value="#{shotHistory.history}" var="currentShot">
+        <h:column id="time-column">
+            <f:facet name="header">Время</f:facet>
+            <h:outputText value="#{currentShot.date}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Время обработки</f:facet>
+            <h:outputText value="#{currentShot.time} мкс"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">X</f:facet>
+            <h:outputText value="#{currentShot.x}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Y</f:facet>
+            <h:outputText value="#{currentShot.y}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">R</f:facet>
+            <h:outputText value="#{currentShot.r}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Попал?</f:facet>
+            <c:set var="yes" value="#{currentShot.result == true}"/>
+            <c:set var="no" value="#{currentShot.result == false}"/>
+            <h:outputText value="ДА!!!" rendered="#{yes}"/>
+            <h:outputText value="НЕТ(((" rendered="#{no}"/>
+        </h:column>
+    </h:dataTable>
+</h:body>
+</html>

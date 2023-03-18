@@ -1,0 +1,31 @@
+{
+  "name": "web4frontend",
+  "version": "1.0.0",
+  "description": "Frontend on Angular for 4th lab",
+  "author": "nutsalhan87",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build"
+  },
+  "dependencies": {
+    "@angular/common": "",
+    "@angular/compiler": "",
+    "@angular/core": "",
+    "@angular/forms": "",
+    "@angular/platform-browser": "",
+    "@angular/platform-browser-dynamic": "",
+    "@angular/router": "",
+    "@angular/cdk": "",
+    "rxjs": "",
+    "zone.js": "",
+    "angular-notifier": "",
+    "bootstrap": "5.3.0-alpha1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "",
+    "@angular/cli": "",
+    "@angular/compiler-cli": "",
+    "typescript": ""
+  }
+}
