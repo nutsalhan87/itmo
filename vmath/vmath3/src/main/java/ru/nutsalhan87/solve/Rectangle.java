@@ -14,6 +14,7 @@ public class Rectangle {
     public static Integrate right() {
         return rectangle((left, right) -> right);
     }
+
     private static Integrate rectangle(BiFunction<Double, Double, Double> borderSelector) {
         return (function, left, right, steps) -> {
             double sum = 0;

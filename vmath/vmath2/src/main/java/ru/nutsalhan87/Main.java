@@ -13,21 +13,19 @@ import java.util.function.Function;
 
 public class Main {
     public static void main(String[] args) throws PythonExecutionException, IOException {
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        System.out.println("Выберите подпрограмму:\n");
-//        switch (reader.readLine()) {
-//            case ("1") -> {
-//                nonSystem();
-//            }
-//            case ("2") -> {
-//                system();
-//            }
-//            default -> {
-//                System.out.println("Некорректный ввод");
-//            }
-//        }
-
-        nonSystem();
+       BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+       System.out.println("Выберите подпрограмму:\n");
+       switch (reader.readLine()) {
+           case ("1") -> {
+               nonSystem();
+           }
+           case ("2") -> {
+               system();
+           }
+           default -> {
+               System.out.println("Некорректный ввод");
+           }
+       }
     }
 
     public static void nonSystem() throws IOException, PythonExecutionException {
@@ -236,6 +234,7 @@ public class Main {
             System.out.println(iae.getMessage() + "\n");
         }
     }
+    
     public static void printTable(List<Map<String, Double>> actions) {
         if (actions.size() == 0) {
             return;
