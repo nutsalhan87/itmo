@@ -10,32 +10,32 @@ use super::{Event, Prof};
 pub struct ProcIo {}
 
 impl Prof for ProcIo {
-    fn profiler(&self, freq_millis: u32, pid: u32, sender: Sender<Box<dyn Event>>) {
+    fn profiler(&self, freq_millis: u32, pid: u32, sender: Sender<Event>) {
         let mut read_bytes_prev = 0;
         let mut write_bytes_prev = 0;
         let start_time = Instant::now();
         loop {
             thread::sleep(Duration::from_millis(freq_millis.into()));
-            let timestamp = Instant::now().duration_since(start_time);
-            let (mut read_bytes, mut write_bytes) = rwbytes(pid);
-            read_bytes -= read_bytes_prev;
-            read_bytes_prev += read_bytes;
-            write_bytes -= write_bytes_prev;
-            write_bytes_prev += write_bytes;
+            let timestamp_millis = Instant::now().duration_since(start_time).as_millis() as u32;
+            let (read_bytes, write_bytes) = rwbytes(pid);
             sender
-                .send(Box::new(IoStat {
-                    timestamp,
-                    value: read_bytes,
-                    operation: IoOperation::Read,
-                }))
+                .send(Event {
+                    timestamp_millis,
+                    description: "io read".to_string(),
+                    value: Some(read_bytes - read_bytes_prev),
+                    unit: "bytes".to_string()
+                })
                 .unwrap();
             sender
-                .send(Box::new(IoStat {
-                    timestamp,
-                    value: write_bytes,
-                    operation: IoOperation::Write,
-                }))
+                .send(Event {
+                    timestamp_millis,
+                    description: "io write".to_string(),
+                    value: Some(write_bytes - write_bytes_prev),
+                    unit: "bytes".to_string()
+                })
                 .unwrap();
+            read_bytes_prev = read_bytes;
+            write_bytes_prev = write_bytes;
         }
     }
 }
@@ -86,36 +86,4 @@ fn rwbytes(pid: u32) -> (u64, u64) {
     .fold((read_bytes, write_bytes), |(acc1, acc2), (v1, v2)| {
         (acc1 + v1, acc2 + v2)
     })
-}
-
-enum IoOperation {
-    Read,
-    Write,
-}
-
-struct IoStat {
-    timestamp: Duration,
-    value: u64,
-    operation: IoOperation,
-}
-
-impl Event for IoStat {
-    fn timestamp_millis(&self) -> u32 {
-        self.timestamp.as_millis() as u32
-    }
-
-    fn description(&self) -> String {
-        match self.operation {
-            IoOperation::Read => "io read".to_string(),
-            IoOperation::Write => "io write".to_string(),
-        }
-    }
-
-    fn value(&self) -> Option<u64> {
-        Some(self.value)
-    }
-
-    fn unit(&self) -> &str {
-        "bytes"
-    }
 }

@@ -10,17 +10,20 @@ use super::{Event, Prof};
 pub struct ProcMem {}
 
 impl Prof for ProcMem {
-    fn profiler(&self, freq_millis: u32, _pid: u32, sender: Sender<Box<dyn Event>>) {
+    fn profiler(&self, freq_millis: u32, _pid: u32, sender: Sender<Event>) {
         let start_time = Instant::now();
         let total = mem_total();
         loop {
             thread::sleep(Duration::from_millis(freq_millis as u64));
+            let timestamp_millis = Instant::now().duration_since(start_time).as_millis() as u32;
             let value = mem_avaliable();
             sender
-                .send(Box::new(MemStat {
-                    timestamp: Instant::now().duration_since(start_time),
-                    value: total - value,
-                }))
+                .send(Event {
+                    timestamp_millis,
+                    description: "Memory occupied".to_string(),
+                    value: Some(total - value),
+                    unit: "kB".to_string()
+                })
                 .unwrap();
         }
     }
@@ -42,27 +45,4 @@ fn mem_avaliable() -> u64 {
         .split_whitespace()
         .skip(1);
     avaliable_line.next().unwrap().parse::<u64>().unwrap()
-}
-
-struct MemStat {
-    timestamp: Duration,
-    value: u64,
-}
-
-impl Event for MemStat {
-    fn timestamp_millis(&self) -> u32 {
-        self.timestamp.as_millis() as u32
-    }
-
-    fn description(&self) -> String {
-        "Memory occupied".to_string()
-    }
-
-    fn value(&self) -> Option<u64> {
-        Some(self.value)
-    }
-
-    fn unit(&self) -> &str {
-        "kB"
-    }
 }

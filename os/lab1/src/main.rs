@@ -2,6 +2,7 @@
 
 mod output;
 mod prof;
+mod util;
 
 use std::{
     env,
@@ -13,7 +14,7 @@ use std::{
     time::Duration,
 };
 
-use output::{Outputter, PlainOutput};
+use output::{Outputter, PlotOutput};
 use prof::{Event, PerfStat, Prof};
 
 struct Args {
@@ -107,7 +108,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         Err("User must have root privileges")?
     }
 
-    let (sender, reciever) = mpsc::channel::<Box<dyn Event>>();
+    let (sender, reciever) = mpsc::channel::<Event>();
     let mut args = parse_args()?;
     let pid = args.subprocess.id();
     for prof in args.profs {
@@ -121,13 +122,13 @@ fn main() -> Result<(), Box<dyn Error>> {
         events.push(event);
     }
     if args.perf_flag {
-        let mut perf_events: Vec<Box<dyn Event>> = PerfStat::new(File::open("perf.pipe").unwrap());
+        let mut perf_events = PerfStat::new(File::open("perf.pipe").unwrap());
         events.append(&mut perf_events);
         std::fs::remove_file("perf.pipe").unwrap();
     }
-    events.sort_by_key(|v| v.timestamp_millis());
+    events.sort_by_key(|v| v.timestamp_millis);
 
-    PlainOutput::new(1).output(&events);
+    PlotOutput::new("plots").output(&events);
 
     Ok(())
 }

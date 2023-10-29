@@ -27,34 +27,25 @@ pub struct PerfStat {
     event: String,
 }
 
-impl PerfStat {
-    pub fn new(pipe: File) -> Vec<Box<dyn Event>> {
-        let pipe_reader = BufReader::new(pipe);
-        let pipe_lines = pipe_reader.lines();
-        let mut stats = Vec::new();
-        for line in pipe_lines.map(|v| v.unwrap()).skip(2) {
-            stats.push(
-                Box::new(serde_json::de::from_str::<PerfStat>(&line).unwrap()) as Box<dyn Event>,
-            );
+impl Into<Event> for PerfStat {
+    fn into(self) -> Event {
+        Event {
+            timestamp_millis: (self.interval * 1000f32) as u32,
+            description: self.event,
+            value: self.counter_value,
+            unit: self.unit,
         }
-        stats
     }
 }
 
-impl Event for PerfStat {
-    fn timestamp_millis(&self) -> u32 {
-        (self.interval * 1000f32) as u32
-    }
-
-    fn description(&self) -> String {
-        self.event.clone()
-    }
-
-    fn value(&self) -> Option<u64> {
-        self.counter_value
-    }
-
-    fn unit(&self) -> &str {
-        &self.unit
+impl PerfStat {
+    pub fn new(pipe: File) -> Vec<Event> {
+        let pipe_reader = BufReader::new(pipe);
+        let pipe_lines = pipe_reader.lines();
+        let mut stats: Vec<Event> = Vec::new();
+        for line in pipe_lines.map(|v| v.unwrap()).skip(2) {
+            stats.push(serde_json::de::from_str::<PerfStat>(&line).unwrap().into());
+        }
+        stats
     }
 }

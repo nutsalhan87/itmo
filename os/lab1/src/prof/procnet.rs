@@ -11,32 +11,32 @@ use super::{Event, Prof};
 pub struct ProcNet {}
 
 impl Prof for ProcNet {
-    fn profiler(&self, freq_millis: u32, pid: u32, sender: Sender<Box<dyn Event>>) {
+    fn profiler(&self, freq_millis: u32, pid: u32, sender: Sender<Event>) {
         let start_time = Instant::now();
         let mut net_devs_stat_prev = HashMap::new();
         net(pid, &mut net_devs_stat_prev);
         loop {
             thread::sleep(Duration::from_millis(freq_millis as u64));
             let mut net_devs_stat = HashMap::new();
+            let timestamp_millis = Instant::now().duration_since(start_time).as_millis() as u32;
             net(pid, &mut net_devs_stat);
-            let timestamp = Instant::now().duration_since(start_time);
             for (dev, (recieve, transmit)) in net_devs_stat {
                 let (r_prev, t_prev) = net_devs_stat_prev.get_mut(&dev).unwrap();
                 sender
-                    .send(Box::new(NetStat {
-                        timestamp,
-                        value: recieve - *r_prev,
-                        dev: dev.clone(),
-                        operation: NetOperation::Recieve,
-                    }))
+                    .send(Event {
+                        timestamp_millis,
+                        description: format!("Net Recieve {}", dev),
+                        value: Some(recieve - *r_prev),
+                        unit: "kB".to_string()
+                    })
                     .unwrap();
                 sender
-                    .send(Box::new(NetStat {
-                        timestamp,
-                        value: transmit - *t_prev,
-                        dev,
-                        operation: NetOperation::Transmit,
-                    }))
+                    .send(Event {
+                        timestamp_millis,
+                        description: format!("Net Transmit {}", dev),
+                        value: Some(transmit - *t_prev),
+                        unit: "kB".to_string()
+                    })
                     .unwrap();
                 *r_prev = recieve;
                 *t_prev = transmit;
@@ -91,37 +91,4 @@ fn net_values(dev: &str) -> Vec<(String, (u64, u64))> {
             (dev, (recieve, transmit))
         })
         .collect::<Vec<_>>()
-}
-
-enum NetOperation {
-    Recieve,
-    Transmit,
-}
-
-struct NetStat {
-    timestamp: Duration,
-    value: u64,
-    dev: String,
-    operation: NetOperation,
-}
-
-impl Event for NetStat {
-    fn timestamp_millis(&self) -> u32 {
-        self.timestamp.as_millis() as u32
-    }
-
-    fn description(&self) -> String {
-        match self.operation {
-            NetOperation::Recieve => format!("Net Recieve {}", self.dev),
-            NetOperation::Transmit => format!("Net Transmit {}", self.dev),
-        }
-    }
-
-    fn value(&self) -> Option<u64> {
-        Some(self.value >> 10)
-    }
-
-    fn unit(&self) -> &str {
-        "kB"
-    }
 }

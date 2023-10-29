@@ -1,7 +1,7 @@
 use std::{
     fs::{read_dir, read_to_string},
     thread,
-    time::{Duration, Instant},
+    time::{Duration, Instant}, sync::mpsc::Sender,
 };
 
 use super::{Event, Prof};
@@ -13,47 +13,51 @@ impl Prof for ProcCpu {
         &self,
         freq_millis: u32,
         pid: u32,
-        sender: std::sync::mpsc::Sender<Box<dyn super::Event>>,
+        sender: Sender<Event>,
     ) {
         let start_time = Instant::now();
         let (mut utime_prev, mut stime_prev) = ustime(pid);
         let mut cpu_time_prev = cpu_time();
         loop {
             thread::sleep(Duration::from_millis(freq_millis as u64));
+            let timestamp_millis = Instant::now().duration_since(start_time).as_millis() as u32;
             let (utime, stime) = ustime(pid);
             let cpu_time = cpu_time();
             let (utime_dif, stime_dif) = (utime - utime_prev, stime - stime_prev);
             let cpu_time_dif = cpu_time - cpu_time_prev;
-            let timestamp = Instant::now().duration_since(start_time);
             sender
-                .send(Box::new(CpuStat {
-                    timestamp,
-                    stat_type: CpuStatType::UserTick,
-                    value: utime_dif,
-                }))
+                .send(Event {
+                    timestamp_millis,
+                    description: "user time".to_string(),
+                    value: Some(utime_dif),
+                    unit: "ticks".to_string()
+                })
                 .unwrap();
             sender
-                .send(Box::new(CpuStat {
-                    timestamp,
-                    stat_type: CpuStatType::KernelTick,
-                    value: stime_dif,
-                }))
+                .send(Event {
+                    timestamp_millis,
+                    description: "kernel time".to_string(),
+                    value: Some(stime_dif),
+                    unit: "ticks".to_string()
+                })
                 .unwrap();
             sender
-                .send(Box::new(CpuStat {
-                    timestamp,
-                    stat_type: CpuStatType::UsageTick,
-                    value: utime_dif + stime_dif,
-                }))
+                .send(Event {
+                    timestamp_millis,
+                    description: "usage time".to_string(),
+                    value: Some(utime_dif + stime_dif),
+                    unit: "ticks".to_string()
+                })
                 .unwrap();
             if cpu_time_dif != 0 {
                 sender
-                    .send(Box::new(CpuStat {
-                        timestamp,
-                        stat_type: CpuStatType::Usage,
-                        value: (utime_dif + stime_dif) * 100 / cpu_time_dif,
-                    }))
-                    .unwrap();
+                .send(Event {
+                    timestamp_millis,
+                    description: "usage".to_string(),
+                    value: Some((utime_dif + stime_dif) * 100 / cpu_time_dif),
+                    unit: "%".to_string()
+                })
+                .unwrap();
             }
             utime_prev = utime;
             stime_prev = stime;
@@ -105,43 +109,4 @@ fn ustime(pid: u32) -> (u64, u64) {
     .fold((utime, stime), |(acc1, acc2), (v1, v2)| {
         (acc1 + v1, acc2 + v2)
     })
-}
-
-enum CpuStatType {
-    UserTick,
-    KernelTick,
-    UsageTick,
-    Usage,
-}
-
-struct CpuStat {
-    timestamp: Duration,
-    stat_type: CpuStatType,
-    value: u64,
-}
-
-impl Event for CpuStat {
-    fn timestamp_millis(&self) -> u32 {
-        self.timestamp.as_millis() as u32
-    }
-
-    fn description(&self) -> String {
-        match self.stat_type {
-            CpuStatType::UserTick => "user time".to_string(),
-            CpuStatType::KernelTick => "kernel time".to_string(),
-            CpuStatType::UsageTick => "usage time".to_string(),
-            CpuStatType::Usage => "usage".to_string(),
-        }
-    }
-
-    fn value(&self) -> Option<u64> {
-        Some(self.value)
-    }
-
-    fn unit(&self) -> &str {
-        match self.stat_type {
-            CpuStatType::Usage => "%",
-            _ => "ticks",
-        }
-    }
 }

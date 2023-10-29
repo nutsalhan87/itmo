@@ -15,18 +15,18 @@ impl PlainOutput {
 }
 
 impl Outputter for PlainOutput {
-    fn output(&mut self, events: &[Box<dyn Event>]) {
+    fn output(&mut self, events: &[Event]) {
         let mut file = unsafe { File::from_raw_fd(self.fd) };
 
         for event in events {
-            if let Some(value) = event.value() {
+            if let Some(value) = event.value {
                 write!(
                     file,
                     "{:.2}   {}: {} {}\n",
-                    event.timestamp_millis(),
-                    event.description(),
+                    event.timestamp_millis,
+                    event.description,
                     value,
-                    event.unit()
+                    event.unit
                 )
                 .unwrap();
             }

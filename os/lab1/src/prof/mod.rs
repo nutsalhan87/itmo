@@ -14,15 +14,16 @@ pub use procnet::ProcNet;
 
 use std::sync::mpsc::Sender;
 
-pub trait Event: Send {
-    fn timestamp_millis(&self) -> u32;
-    fn description(&self) -> String;
-    fn value(&self) -> Option<u64>;
-    fn unit(&self) -> &str;
+#[derive(Debug, Clone)]
+pub struct Event {
+    pub timestamp_millis: u32,
+    pub description: String,
+    pub value: Option<u64>,
+    pub unit: String
 }
 
 pub trait Prof: Sync + Send {
-    fn profiler(&self, freq_millis: u32, pid: u32, sender: Sender<Box<dyn Event>>);
+    fn profiler(&self, freq_millis: u32, pid: u32, sender: Sender<Event>);
 }
 
 pub fn profs(events: &str) -> Vec<Box<dyn Prof>> {

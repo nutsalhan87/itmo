@@ -1,7 +1,7 @@
 use std::{
     fs::{read_dir, read_to_string},
     thread,
-    time::{Duration, Instant},
+    time::{Duration, Instant}, sync::mpsc::Sender,
 };
 
 use super::{Event, Prof};
@@ -13,17 +13,20 @@ impl Prof for ProcMaps {
         &self,
         freq_millis: u32,
         pid: u32,
-        sender: std::sync::mpsc::Sender<Box<dyn super::Event>>,
+        sender: Sender<Event>,
     ) {
         let start_time = Instant::now();
         loop {
             thread::sleep(Duration::from_millis(freq_millis as u64));
+            let timestamp_millis = Instant::now().duration_since(start_time).as_millis() as u32;
             let value = maps(pid);
             sender
-                .send(Box::new(MapsStat {
-                    timestamp: Instant::now().duration_since(start_time),
-                    value,
-                }))
+                .send(Event {
+                    timestamp_millis,
+                    description: "Process memory".to_string(),
+                    value: Some(value),
+                    unit: "kB".to_string()
+                })
                 .unwrap();
         }
     }
@@ -77,27 +80,4 @@ fn maps_mem(maps: &str) -> u64 {
             }
         })
         .sum()
-}
-
-struct MapsStat {
-    timestamp: Duration,
-    value: u64,
-}
-
-impl Event for MapsStat {
-    fn timestamp_millis(&self) -> u32 {
-        self.timestamp.as_millis() as u32
-    }
-
-    fn description(&self) -> String {
-        "Process memory".to_string()
-    }
-
-    fn value(&self) -> Option<u64> {
-        Some(self.value >> 10)
-    }
-
-    fn unit(&self) -> &str {
-        "kB"
-    }
 }
