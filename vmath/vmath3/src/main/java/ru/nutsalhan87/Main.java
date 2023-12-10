@@ -26,6 +26,7 @@ public class Main {
                 1. x^3 - 3x^2 + 7x - 10
                 2. 2x^3 - 5x^2 - 3x + 21
                 3. 7x^3 - 2x^2 - 9x + 36
+                4. log2(x)
                 """);
         switch (reader.readLine()) {
             case ("1") -> {
@@ -36,6 +37,9 @@ public class Main {
             }
             case ("3") -> {
                 function = (arg) -> 7 * Math.pow(arg, 3) - 2 * Math.pow(arg, 2) - 9 * arg + 36;
+            }
+            case ("4") -> {
+                function = (arg) -> Math.log10(arg) / Math.log10(2);
             }
             default -> {
                 incorrect();
