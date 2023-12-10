@@ -1,0 +1,9 @@
+DROP VIEW spaceship_can_land_planet;
+DROP TABLE spaceship_on_planet;
+DROP TABLE planet_distance;
+DROP TABLE planet;
+DROP TABLE crew_of_spaceship;
+DROP TABLE spaceship;
+DROP TABLE crew_composition;
+DROP TABLE crew;
+DROP TABLE human;

@@ -1,0 +1,84 @@
+Н_ЛЮДИ
+    Столбец     |             Тип             | Правило сортировки | Допустимость NULL | По умолчанию | Хранилище | Сжатие | Цель для статистики |                 Описание
+----------------+-----------------------------+--------------------+-------------------+--------------+-----------+--------+---------------------+-------------------------------------------
+ ИД             | integer                     |                    |                   |              | plain     |        |                     | Уникальный номер человека
+ ФАМИЛИЯ        | character varying(25)       |                    |                   |              | extended  |        |                     | Фамилия человека
+ ИМЯ            | character varying(15)       |                    |                   |              | extended  |        |                     | Имя человека
+ ОТЧЕСТВО       | character varying(20)       |                    |                   |              | extended  |        |                     | Отчество человека
+ ПИН            | character varying(20)       |                    |                   |              | extended  |        |                     | Номер страхового свидетельства ГПС
+ ИНН            | character varying(20)       |                    |                   |              | extended  |        |                     | Идентификационный номер налогоплательщика
+ ДАТА_РОЖДЕНИЯ  | timestamp without time zone |                    |                   |              | plain     |        |                     | Дата рождения человека
+ ПОЛ            | character(1)                |                    |                   |              | extended  |        |                     | Пол человека
+ МЕСТО_РОЖДЕНИЯ | character varying(200)      |                    |                   |              | extended  |        |                     | Сведения из паспорта
+ ИНОСТРАН       | character varying(3)        |                    |                   |              | extended  |        |                     |
+ КТО_СОЗДАЛ     | character varying(40)       |                    |                   |              | extended  |        |                     |
+ КОГДА_СОЗДАЛ   | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ КТО_ИЗМЕНИЛ    | character varying(40)       |                    |                   |              | extended  |        |                     |
+ КОГДА_ИЗМЕНИЛ  | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ ДАТА_СМЕРТИ    | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ ФИО            | character varying(80)       |                    |                   |              | extended  |        |                     |
+Индексы:
+    "ИНН_UK" UNIQUE, btree ("ИНН")
+    "ПИН_UK" UNIQUE, btree ("ПИН")
+    "ФАМ_ЛЮД" btree ("ФАМИЛИЯ")
+    "ЧЛВК_PK" UNIQUE, btree ("ИД")
+Метод доступа: heap
+
+
+
+Н_СЕССИЯ
+    Столбец    |             Тип             | Правило сортировки | Допустимость NULL | По умолчанию | Хранилище | Сжатие | Цель для статистики | Описание
+---------------+-----------------------------+--------------------+-------------------+--------------+-----------+--------+---------------------+----------
+ ИД            | integer                     |                    |                   |              | plain     |        |                     |
+ СЭС_ИД        | integer                     |                    |                   |              | plain     |        |                     |
+ ЧЛВК_ИД       | integer                     |                    |                   |              | plain     |        |                     |
+ ДАТА          | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ ВРЕМЯ         | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ АУДИТОРИЯ     | character varying(8)        |                    |                   |              | extended  |        |                     |
+ ДАТА_К        | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ ВРЕМЯ_К       | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ АУДИТОРИЯ_К   | character varying(8)        |                    |                   |              | extended  |        |                     |
+ УЧГОД         | character varying(9)        |                    |                   |              | extended  |        |                     |
+ ГРУППА        | integer                     |                    |                   |              | plain     |        |                     |
+ СЕМЕСТР       | integer                     |                    |                   |              | plain     |        |                     |
+ КТО_СОЗДАЛ    | character varying(20)       |                    |                   |              | extended  |        |                     |
+ КОГДА_СОЗДАЛ  | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ КТО_ИЗМЕНИЛ   | character varying(20)       |                    |                   |              | extended  |        |                     |
+ КОГДА_ИЗМЕНИЛ | timestamp without time zone |                    |                   |              | plain     |        |                     |
+Индексы:
+    "SYS_C003500_IFK" btree ("ЧЛВК_ИД")
+    "СЕС_СЭС_FK" btree ("СЭС_ИД")
+Метод доступа: heap
+
+
+
+Н_ВЕДОМОСТИ
+     Столбец     |             Тип             | Правило сортировки | Допустимость NULL | По умолчанию | Хранилище | Сжатие | Цель для статистики |                      Описание
+-----------------+-----------------------------+--------------------+-------------------+--------------+-----------+--------+---------------------+-----------------------------------------------------
+ ИД              | integer                     |                    |                   |              | plain     |        |                     | Уникальный идентификатор
+ ЧЛВК_ИД         | integer                     |                    |                   |              | plain     |        |                     | Внешний ключ к таблице Н_ЛЮДИ
+ НОМЕР_ДОКУМЕНТА | character varying(40)       |                    |                   |              | extended  |        |                     |
+ ОЦЕНКА          | character varying(8)        |                    |                   |              | extended  |        |                     | Оценка успеваемости
+ СРОК_СДАЧИ      | timestamp without time zone |                    |                   |              | plain     |        |                     | Дата, до которой должен быть сдан (экзамен,зачет)
+ ДАТА            | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ СЭС_ИД          | integer                     |                    |                   |              | plain     |        |                     | Внешний ключ к таблице Н_СОДЕРЖАНИЯ_ЭЛЕМЕНТОВ_СТРОК
+ ТВ_ИД           | integer                     |                    |                   |              | plain     |        |                     | Внешний ключ к таблице Н_ТИПЫ_ВЕДОМОСТЕЙ
+ КТО_СОЗДАЛ      | character varying(40)       |                    |                   |              | extended  |        |                     |
+ КОГДА_СОЗДАЛ    | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ КТО_ИЗМЕНИЛ     | character varying(40)       |                    |                   |              | extended  |        |                     |
+ КОГДА_ИЗМЕНИЛ   | timestamp without time zone |                    |                   |              | plain     |        |                     |
+ ВЕД_ИД          | integer                     |                    |                   |              | plain     |        |                     |
+ СОСТОЯНИЕ       | character varying(12)       |                    |                   |              | extended  |        |                     |
+ ОТД_ИД          | integer                     |                    |                   |              | plain     |        |                     |
+ БУКВА           | character varying(8)        |                    |                   |              | extended  |        |                     |
+ ПРИМЕЧАНИЕ      | character varying(200)      |                    |                   |              | extended  |        |                     |
+ БАЛЛЫ           | numeric(5,2)                |                    |                   |              | main      |        |                     |
+Индексы:
+    "ВЕД_PK" UNIQUE, btree ("ИД")
+    "ВЕД_ДАТА_I" btree ("ДАТА")
+    "ВЕД_ИП_FK_I" btree ("СЭС_ИД")
+    "ВЕД_ОТД_I" btree ("ОТД_ИД")
+    "ВЕД_ОЦЕНКА_I" btree ("ОЦЕНКА")
+    "ВЕД_ТВ_FK_I" btree ("ТВ_ИД")
+    "ВЕД_ЧЛВК_FK_IFK" btree ("ЧЛВК_ИД")
+Метод доступа: heap
