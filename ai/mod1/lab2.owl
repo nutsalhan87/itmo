@@ -1,0 +1,486 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#"
+     xml:base="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:lab2="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled -->
+
+    <owl:AnnotationProperty rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Magictype -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Magictype">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Magictype"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Monster -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Monster">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Monster"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Race -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Race">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Race"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Attack -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Attack">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Attack"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Spell"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Level -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Level">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Attack -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Attack"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#EnemyAttack -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#EnemyAttack">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Attack"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Creature"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Magictype -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Magictype"/>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Monster -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Monster">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Race -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Race">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#CreatureType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Spell -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Spell">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Attack"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Team -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Team"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Active -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Active">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Magictype"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#AncientRus -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#AncientRus">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Team"/>
+        <Hero rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Dom"/>
+        <Hero rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Kom"/>
+        <Hero rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Lom"/>
+        <Hero rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Rom"/>
+        <Hero rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Tom"/>
+        <rdfs:label>Древние русы</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Dom -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Dom">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero"/>
+        <Magictype rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Static"/>
+        <Race rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Human"/>
+        <Level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</Level>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Elf -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Elf">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Race"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#ElfActive -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#ElfActive">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Spell"/>
+        <Magictype rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Active"/>
+        <Race rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Elf"/>
+        <Attack rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</Attack>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#ElfStatic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#ElfStatic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Spell"/>
+        <Magictype rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Static"/>
+        <Race rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Elf"/>
+        <Attack rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</Attack>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy"/>
+        <Monster rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Orc"/>
+        <Level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</Level>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy"/>
+        <CreatureType rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Orc"/>
+        <Monster rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Orc"/>
+        <Level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</Level>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy"/>
+        <CreatureType rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Megawolf"/>
+        <Monster rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Megawolf"/>
+        <Level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</Level>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy"/>
+        <CreatureType rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Megawolf"/>
+        <Monster rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Megawolf"/>
+        <Level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">11</Level>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Human -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Human">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Race"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#HumanActive -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#HumanActive">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Spell"/>
+        <Magictype rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Active"/>
+        <Race rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Human"/>
+        <Attack rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</Attack>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#HumanStatic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#HumanStatic">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Spell"/>
+        <Magictype rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Static"/>
+        <Race rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Human"/>
+        <Attack rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</Attack>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Kom -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Kom">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero"/>
+        <Magictype rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Static"/>
+        <Race rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Elf"/>
+        <Level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</Level>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Lizards -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Lizards">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Team"/>
+        <Enemy rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy1"/>
+        <Enemy rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy2"/>
+        <Enemy rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy3"/>
+        <Enemy rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Enemy4"/>
+        <rdfs:label>Ящеры</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Lom -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Lom">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero"/>
+        <Magictype rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Active"/>
+        <Race rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Elf"/>
+        <Level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">17</Level>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Megawolf -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Megawolf">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Monster"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#MegawolfAttack -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#MegawolfAttack">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#EnemyAttack"/>
+        <Monster rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Megawolf"/>
+        <Attack rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</Attack>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Orc -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Orc">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Monster"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#OrcAttack -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#OrcAttack">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#EnemyAttack"/>
+        <Monster rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Orc"/>
+        <Attack rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</Attack>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Rom -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Rom">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero"/>
+        <Magictype rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Active"/>
+        <Race rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Human"/>
+        <Level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</Level>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Static -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Static">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Magictype"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Tom -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Tom">
+        <rdf:type rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Hero"/>
+        <Magictype rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Active"/>
+        <Race rdf:resource="http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#Human"/>
+        <Level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</Level>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+

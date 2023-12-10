@@ -1,0 +1,59 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX lab2: <http://www.semanticweb.org/nutsalhan87/ontologies/2023/8/lab2#>
+
+// Суммарный урон команд героев
+SELECT ?team (SUM(?summarySpell) AS ?teamSpell) WHERE {
+	?team rdf:type lab2:Team.
+	?team lab2:Hero ?name.
+	?name lab2:Level ?lvl.
+	?name lab2:Race ?race.
+	?name lab2:Magictype ?magictype.
+	?spell rdf:type lab2:Spell.
+	?spell lab2:Race ?race.
+	?spell lab2:Magictype ?magictype.
+	?spell lab2:Attack ?spellPoint.
+	BIND(?lvl * ?spellPoint AS ?summarySpell)
+} GROUP BY ?team
+
+// Суммарный урон команд врагов
+SELECT ?team (SUM(?summaryAttack) AS ?teamAttack) WHERE {
+     	?team rdf:type lab2:Team.
+	?team lab2:Enemy ?monster.
+	?monster lab2:Level ?lvl.
+	?monster lab2:Monster ?monsterType.
+	?attack rdf:type lab2:EnemyAttack.
+	?attack lab2:Monster ?monsterType.
+	?attack lab2:Attack ?attackPoint.
+	BIND(?lvl * ?attackPoint AS ?summaryAttack)
+} GROUP BY ?team
+
+// Кто выиграет: команда героев или врагов?
+SELECT ?heroesTeam ?teamSpell ?enemiesTeam ?teamAttack (IF(?teamSpell > ?teamAttack, ?heroesTeam, ?enemiesTeam) AS ?winner) WHERE {
+     	{
+	SELECT ?heroesTeam (SUM(?summarySpell) AS ?teamSpell) WHERE {
+		?heroesTeam rdf:type lab2:Team.
+		?heroesTeam lab2:Hero ?name.
+		?name lab2:Level ?lvl.
+		?name lab2:Race ?race.
+		?name lab2:Magictype ?magictype.
+		?spell rdf:type lab2:Spell.
+		?spell lab2:Race ?race.
+		?spell lab2:Magictype ?magictype.
+		?spell lab2:Attack ?spellPoint.
+		BIND(?lvl * ?spellPoint AS ?summarySpell)
+	} GROUP BY ?heroesTeam }
+
+	{ SELECT ?enemiesTeam (SUM(?summaryAttack) AS ?teamAttack) WHERE {
+     		?enemiesTeam rdf:type lab2:Team.
+		?enemiesTeam lab2:Enemy ?monster.
+		?monster lab2:Level ?lvl.
+		?monster lab2:Monster ?monsterType.
+		?attack rdf:type lab2:EnemyAttack.
+		?attack lab2:Monster ?monsterType.
+		?attack lab2:Attack ?attackPoint.
+		BIND(?lvl * ?attackPoint AS ?summaryAttack)
+	} GROUP BY ?enemiesTeam }
+}
