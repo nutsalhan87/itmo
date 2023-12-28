@@ -1,0 +1,47 @@
+<div [id]="'collapseCasesDetectives' + case.id" class="accordion">
+    @for (detectiveStatus of case.detectives; track detectiveStatus.detective.id) {
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapseCase' + case.id + 'Detective' + detectiveStatus.detective.id">
+                {{detectiveStatus.detective.name }}
+            </button>
+        </div>
+        <div [id]="'collapseCase' + case.id + 'Detective' + detectiveStatus.detective.id"
+            class="accordion-collapse collapse"
+            [attr.data-bs-parent]="'#collapseCasesDetectives' + case.id">
+            <div class="accordion-body d-grid">
+                <p>Серийный номер: {{ detectiveStatus.detective.series }}</p>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                            [name]="'stateGroup' + case.id + 'Detective' + detectiveStatus.detective.id"
+                            [id]="'case' + case.id + 'DetectiveAssigned' + detectiveStatus.detective.id"
+                            [checked]="detectiveStatus.status == 'assigned'" [disabled]="isUnchangable(case, detectiveStatus)"
+                            (click)="changeDetectiveStatus(detectiveStatus.detective, 'assigned')">
+                        <label class="form-check-label"
+                            [htmlFor]="'case' + case.id + 'DetectiveAssigned' + detectiveStatus.detective.id">
+                            Причислен
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                            [name]="'stateGroup' + case.id + 'Detective' + detectiveStatus.detective.id"
+                            [id]="'case' + case.id + 'DetectiveRemoved' + detectiveStatus.detective.id"
+                            [checked]="detectiveStatus.status == 'removed'" [disabled]="isUnchangable(case, detectiveStatus)"
+                            (click)="changeDetectiveStatus(detectiveStatus.detective, 'removed')">
+                        <label class="form-check-label"
+                            [htmlFor]="'case' + case.id + 'DetectiveRemoved' + detectiveStatus.detective.id">
+                            Отстранен
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    } @empty {
+    <span class="text-body-secondary">
+        Назначенных детективов нет
+    </span>
+    }
+</div>

@@ -1,0 +1,25 @@
+<p class="fs-5 fw-light mt-3">Партнеры</p>
+<div [id]="'minorCasePartnersAccordion' + crimeId" class="accordion">
+    @for (partner of partners; track partner.id) {
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapseMinorCase' + crimeId + 'Partner' + partner.id">
+                {{ partner.name}}
+            </button>
+        </div>
+        <div [id]="'collapseMinorCase' + crimeId + 'Partner' + partner.id" class="accordion-collapse collapse"
+            [attr.data-bs-parent]="'#minorCasePartnersAccordion' + crimeId">
+            <div class="accordion-body d-grid">
+                <span>Серийный номер: {{ partner.series }}</span>
+                <span>Дата выдачи удостоверения: {{ partner.dateOfIssue }}</span>
+                <span>{{ partner.status == 'assigned' ? 'Причислен к делу' : 'Отстранен от дела' }}</span>
+            </div>
+        </div>
+    </div>
+    } @empty {
+    <span class="text-body-secondary fs-5">
+        Партнеров нет
+    </span>
+    }
+</div>

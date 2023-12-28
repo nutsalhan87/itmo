@@ -1,0 +1,95 @@
+<div [id]="'minorCasePersonsAccordion' + crimeId" class="accordion">
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapseMinorCase' + crimeId + 'PersonRelation'">Люди, относящиеся к
+                делу</button>
+        </div>
+        <div [id]="'collapseMinorCase' + crimeId + 'PersonRelation'" class="accordion-collapse collapse"
+            [attr.data-bs-parent]="'#minorCasePersonsAccordion' + crimeId">
+            <div class="accordion-body d-grid">
+                <div [id]="'collapseMinorCase' + crimeId + 'PersonRelationSub'">
+                    @for (personRelation of personRelations; track personRelation.id) {
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                [attr.data-bs-target]="'#collapseMinorCase' + crimeId + 'PersonRelationSub' + personRelation.id">
+                                <ng-icon
+                                    [name]="personRelation.relation == 'witness' ? 'bootstrapEye' : 'bootstrapPersonBoundingBox'"></ng-icon>
+                                {{ personRelation.name }}
+                            </button>
+                        </div>
+                        <div [id]="'collapseMinorCase' + crimeId + 'PersonRelationSub' + personRelation.id"
+                            class="accordion-collapse collapse"
+                            [attr.data-bs-parent]="'#collapseMinorCase' + crimeId + 'PersonRelationSub'">
+                            <div class="accordion-body d-grid row-gap-2">
+                                <span>Раса: {{ personRelation.race }}</span>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio"
+                                            [name]="'relationGroup' + personRelation.id"
+                                            [id]="'caseRelationWitness' + personRelation.id"
+                                            [checked]="personRelation.relation == 'witness'"
+                                            (click)="changePersonRelation(personRelation, 'witness')">
+                                        <label class="form-check-label"
+                                            [htmlFor]="'caseRelationWitness' + personRelation.id">
+                                            Свидетель
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio"
+                                            [name]="'relationGroup' + personRelation.id"
+                                            [id]="'caseRelationSuspect' + personRelation.id"
+                                            [checked]="personRelation.relation == 'suspect'"
+                                            (click)="changePersonRelation(personRelation, 'suspect')">
+                                        <label class="form-check-label"
+                                            [htmlFor]="'caseRelationSuspect' + personRelation.id">
+                                            Подозреваемый
+                                        </label>
+                                    </div>
+                                </div>
+                                <textarea class="form-control" [(ngModel)]="personRelation.note"
+                                    (change)="changePersonNote(personRelation, personRelation.note)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    } @empty {
+                    <span class="text-body-secondary fs-5">
+                        Людей нет
+                    </span>
+                    }
+                </div>
+                <div class="d-grid mt-3 row-gap-2">
+                    <span class="fs-5">Добавить человека</span>
+                    @if (unrelatedPersons.length == 0) {
+                    <span class="text-body-secondary">Добавлять некого</span>
+                    } @else {
+                    <select class="form-select" [(ngModel)]="newPerson.id">
+                        @for (p of unrelatedPersons; track p.id; let isFirst = $first) {
+                        <option [value]="p.id">{{ p.name }}</option>
+                        }
+                    </select>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="newRelationGroup"
+                                id="caseNewRelationWitness" checked (click)="newPerson.relation = 'witness'">
+                            <label class="form-check-label" for="caseNewRelationWitness">
+                                Свидетель
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="newRelationGroup"
+                                id="caseNewRelationSuspect" (click)="newPerson.relation = 'suspect'">
+                            <label class="form-check-label" for="caseNewRelationSuspect">
+                                Подозреваемый
+                            </label>
+                        </div>
+                    </div>
+                    <textarea class="form-control" [(ngModel)]="newPerson.note"></textarea>
+                    <button class="btn btn-success" (click)="createPersonRelation()">Добавить</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

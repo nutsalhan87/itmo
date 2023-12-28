@@ -1,0 +1,28 @@
+<div [id]="'minorCaseNotesAccordion' + crimeId" class="accordion">
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapseMinorCase' + crimeId + 'Note'">Заметки</button>
+        </div>
+        <div [id]="'collapseMinorCase' + crimeId + 'Note'" class="accordion-collapse collapse"
+            [attr.data-bs-parent]="'#minorCaseNotesAccordion' + crimeId">
+            <div class="accordion-body d-grid row-gap-1">
+                @for (note of notes; track note.id) {
+                    <span>Автор заметки: {{ getPolicemanName(note.policemanId) }}</span>
+                    <span class="border rounded-1 px-2 mb-3">{{ note.note }}</span>
+                } @empty {
+                <span class="text-body-secondary fs-5">
+                    Заметок нет
+                </span>
+                }
+                <div class="input-group">
+                    <textarea class="form-control" [formControl]="newNote"></textarea>
+                    <button class="btn btn-success" (click)="createNote()">Создать заметку</button>
+                </div>
+                <span class="text-danger" [class.d-none]="!temporaryInvalidMark">
+                    Текстовое поле для отправки должно быть непустым
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

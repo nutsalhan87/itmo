@@ -1,0 +1,26 @@
+<p class="fs-3">Дела</p>
+<div id="minorCasesAccordion" class="accordion">
+    @for (case of cases; track case.id) {
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <button class="accordion-button collapsed" #deferAction type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapseMinorCase' + case.id">{{ case.type }}</button>
+        </div>
+        <div [id]="'collapseMinorCase' + case.id" class="accordion-collapse collapse"
+            data-bs-parent="#minorCasesAccordion">
+            <div class="accordion-body d-grid">
+                @defer (on interaction(deferAction)) {
+                <span class="fs-5">Район: {{ case.district }}</span>
+                <app-partners [crimeId]="case.id"></app-partners>
+                <app-notes class="mt-3" [crimeId]="case.id"></app-notes>
+                <app-persons class="mt-3" [crimeId]="case.id" [persons]="persons"></app-persons>
+                }
+            </div>
+        </div>
+    </div>
+    } @empty {
+    <span class="text-body-secondary fs-3">
+        Дел нет
+    </span>
+    }
+</div>

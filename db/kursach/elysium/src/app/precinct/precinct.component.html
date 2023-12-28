@@ -1,0 +1,5 @@
+<span class="fs-3 fw-medium mb-3">Участок №{{ precinct.number }}</span>
+<span class="fs-5 fw-normal">Районы:</span>
+@for (district of precinct.districts; track district.id) {
+    <span class="fs-3">{{ district.name }}</span>
+}

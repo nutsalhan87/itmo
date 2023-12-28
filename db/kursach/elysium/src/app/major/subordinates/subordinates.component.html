@@ -1,0 +1,22 @@
+<p class="fs-3">Подчиненные</p>
+<div id="collapseSubRoot" class="accordion">
+    @for (subordinate of subordinates; track subordinate.id) {
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapseSub' + subordinate.id">{{ subordinate.name }}</button>
+        </div>
+        <div [id]="'collapseSub' + subordinate.id" class="accordion-collapse collapse"
+            data-bs-parent="#collapseSubRoot">
+            <div class="accordion-body">
+                <p>Серийный номер: {{ subordinate.series }}</p>
+                <p>Дата выдачи: {{ subordinate.dateOfIssue }}</p>
+            </div>
+        </div>
+    </div>
+    } @empty {
+    <span class="text-body-secondary fs-3">
+        Подчиненных нет
+    </span>
+    }
+</div>

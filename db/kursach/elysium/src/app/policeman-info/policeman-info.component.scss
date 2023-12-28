@@ -1,0 +1,6 @@
+@use '../../util';
+
+:host {
+    @include util.app-card();
+    display: grid;
+}

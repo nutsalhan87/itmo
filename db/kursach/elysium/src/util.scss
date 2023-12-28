@@ -1,0 +1,9 @@
+@import 'bootstrap/scss/bootstrap-reboot';
+
+@mixin app-card() {
+    padding: 1rem;
+    border-style: solid;
+    border-radius: var(--#{$prefix}border-radius);
+    border-width: 1px;
+    border-color: var(--#{$prefix}border-color);
+}

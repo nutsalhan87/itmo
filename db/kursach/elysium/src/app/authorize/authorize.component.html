@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div>
+                <div class="mb-3">
+                    <label for="login" class="form-label h3">Серийный номер</label>
+                    <input id="login" class="form-control" [formControl]="login"
+                        [class.is-invalid]="!login.valid" type="text">
+                    <div class="invalid-feedback">Поле должно быть непустым</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label h3">Пароль</label>
+                    <input id="password" class="form-control" [formControl]="password"
+                        [class.is-invalid]="!password.valid" type="text">
+                    <div class="invalid-feedback">Поле должно быть непустым</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <input class="btn btn-secondary col-3" [class.disabled]="!(login.valid && password.valid)" type="submit" value="Войти" (click)="submit()">
+    </div>
+</div>

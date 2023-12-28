@@ -1,0 +1,61 @@
+<p class="fs-3">Дела</p>
+<div id="collapseCasesRoot" class="accordion">
+    @for (case of cases; track case.id) {
+    <div class="accordion-item">
+        <div class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapseCase' + case.id">{{ case.type }}</button>
+        </div>
+        <div [id]="'collapseCase' + case.id" class="accordion-collapse collapse" data-bs-parent="#collapseCasesRoot">
+            <div class="accordion-body d-grid">
+                <p>Район преступления: {{ case.district }}</p>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" [name]="'stateGroup' + case.id"
+                            [id]="'caseStateWork' + case.id" [checked]="case.state == 'on_work'"
+                            [disabled]="isUnchangable(case)" (click)="changeCaseState(case, 'on_work')">
+                        <label class="form-check-label" [htmlFor]="'caseStateWork' + case.id">
+                            В работе
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" [name]="'stateGroup' + case.id"
+                            [id]="'caseStateFreeze' + case.id" [checked]="case.state == 'freeze'"
+                            [disabled]="isUnchangable(case)" (click)="changeCaseState(case, 'freeze')">
+                        <label class="form-check-label" [htmlFor]="'caseStateFreeze' + case.id">
+                            Заморожено
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" [name]="'stateGroup' + case.id"
+                            [id]="'caseStateClose' + case.id" [checked]="case.state == 'close'"
+                            [disabled]="isUnchangable(case)" (click)="changeCaseState(case, 'close')">
+                        <label class="form-check-label" [htmlFor]="'caseStateClose' + case.id">
+                            Закрыто
+                        </label>
+                    </div>
+                </div>
+                <p class="mt-4">Полицейские на деле</p>
+                <app-detectives [case]="case"></app-detectives>
+                @if (detectivesNotInCase(case).length != 0 && !isUnchangable(case)) {
+                <div class="dropdown-center mx-auto mt-4">
+                    <button class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown">Назначить
+                        полицейского</button>
+                    <ul class="dropdown-menu">
+                        @for (unassigned of detectivesNotInCase(case); track unassigned.id) {
+                        <li><a class="dropdown-item" (click)="assignToCase(unassigned, case)">
+                            {{ unassigned.name}}
+                        </a></li>
+                        }
+                    </ul>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    } @empty {
+    <span class="text-body-secondary fs-3">
+        Дел нет
+    </span>
+    }
+</div>
