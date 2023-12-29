@@ -1,0 +1,960 @@
+openapi: 3.1.0
+info:
+  title: Ревашольская милиция - OpenAPI 3.1.0
+  version: 0.0.1
+tags:
+  - name: Аутентификация
+  - name: Полицейский
+  - name: Преступление
+  - name: Дело
+  - name: Запись о деле
+  - name: Участие человека в деле
+  - name: Назначение полицейского на дело
+  - name: Участок
+
+servers:
+  - url: /api/v1
+
+paths:
+  /public/login:
+    post:
+      tags:
+        - Аутентификация
+      summary: Вход для полицейского
+      description: После входа будет установлена cookie, которая позволит выполнять запросы от лица полицейского
+      operationId: login
+      requestBody: 
+        description: Серийник и пароль
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/login'
+      responses:
+        '200':
+          description: Аутентификация совершена, cookie установлена 
+        '401':
+          description: Если такого полицейского не существует или пароль оказался неверным. <br><br> Оба типа ошибки кодируются одинаково - это сделано намеренно, чтобы исключить выгрузку всех серийников злоумышленниками
+  /auth/major/crime-case/create:
+    post:
+      tags:
+        - Дело
+      summary: Создание дела по преступлению в районе этого начальника
+      description: Создается запись о деле по преступлению
+      operationId: crimeCaseCreate
+      requestBody:
+        description: Id дела
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/crime-id'
+      responses:
+        '201':
+          description: Успешно создана запись о деле по преступлению
+        '400':
+          description: Дело уже существует
+        '403':
+          description: Если преступление относится не к его району
+        '404':
+          description: Если преступления с таким id не существует
+      security:
+        - session:
+          - major
+  /auth/minor/note/create:
+    post:
+      tags:
+        - Запись о деле
+      summary: Создание заметки по делу
+      operationId: noteCreate
+      requestBody:
+        description: Id дела и текст заметки
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/note-create'
+      responses:
+        '201':
+          description: Успешно создана запись о деле
+        '403':
+          description: Полицейский не назначен на дело или снят с него
+        '404':
+          description: Такого преступления или дела на него нет
+      security:
+        - session:
+          - minor
+  /auth/major/policeman-case/put:
+    put:
+      tags:
+        - Назначение полицейского на дело
+      summary: Назначение начальником полицейского на открытое дело
+      operationId: policemanCaseAdd
+      requestBody:
+        description: Id дела и полицейского, а также устанавливаемый статус (по умолчанию assigned)
+        required: true
+        content:
+          applicaton/json:
+            schema:
+              $ref: '#/components/schemas/put-policeman-on-case'
+      responses:
+        '201':
+          description: Полицейский успешно назначен на дело
+        '204':
+          description: Статус полицейского на деле успешно изменен
+        '403':
+          description: Полицейский не находится в подчинении
+        '400':
+          description: Дело не в статусе on_work или состояние на деле некорректное
+        '404':
+          description: Полицейского, преступления или дела не существует
+      security:
+        - session:
+          - major
+  /auth/minor/person-relevant-to-case/put:
+    put:
+      tags:
+        - Участие человека в деле
+      summary: Добавление / обновление человека как участвующего в деле
+      requestBody:
+        description: Id дела и человека, а также опциональные (если обновляем) статус его как участника и запись о нем
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/put-person-to-case'
+      responses:
+        '204':
+          description: Участие человека в деле обновлено
+        '201':
+          description: Участие человека в деле отмечено
+        '400':
+          description: Дело не в статусе on_work или запись сделана о себе. Или если запись не существует (добавление) и статус или записка не указаны
+        '403':
+          description: Полицейский не назначен на дело или снят с него, а также (при обновлении) если он не владеет записью о человеке
+        '404':
+          description: Если дела или человека с указанным id не существует
+      security:
+        - session:
+          - minor
+  /auth/major/crime-case/{crime-id}/update/state/{name}:
+    patch:
+      tags:
+        - Дело
+      summary: Обновление состояния дела
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema:
+            $ref: '#/components/schemas/case-state'
+          description: Устанавливаемое состояние дела
+        - in: path
+          name: crime-id
+          required: true
+          schema:
+            type: integer
+            example: 3
+          description: id преступления, по которому создано дело
+      responses:
+        '204':
+          description: Состояние дела успешно поменяно
+        '400':
+          description: Была попытка поменять статус закрытого дела, что запрещено, также если дела на преступление не создано или если такого состояния дела не существует
+        '403':
+          description: Дело было создано другим начальником, попытка изменения отклонена
+        '404':
+          description: Нет id с таким преступлением
+      security:
+        - session: [major]
+  /auth/policeman/self:
+    get:
+      tags:
+        - Полицейский
+      summary: Получение основной информации о себе
+      responses:
+        '200':
+          description: "Основная информация о себе: имя, звание, серийник, дата его выдачи"
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/base-policeman'
+      security: 
+        - session: [minor, major]
+  /auth/precinct/my:
+    get:
+      tags:
+        - Участок
+      summary: Получение основной информации о своем участке
+      responses:
+        '200':
+          description: "Основная информация о своем участке: номер участка, id связанных с ним районов и их названия"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/base-precinct'
+      security: 
+        - session: [minor, major]
+  /auth/major/slaves/my:
+    get:
+      tags:
+        - Полицейский
+      summary: Получение основной информации о подчиненных
+      responses:
+        '200':
+          description: "Основная информация о подчиненных: id полицейского, имя, серийник, дата его выдачи"
+          content: 
+            application/json: 
+              schema: 
+                $ref: '#/components/schemas/no-context-no-rank-policemen'
+      security: 
+        - session: [major]
+  /auth/major/crime/in-my-precinct-districts/list:
+    get:
+      tags:
+        - Преступление
+      summary: Получение основной информации о преступлениях в районах своего участка
+      responses:
+        '200':
+          description: "Основная информация о преступлениях в районах своего участка: id преступления и его тип, район и было ли уже открыто дело"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/base-crimes'
+      security: 
+        - session: [major]
+  /auth/major/crime-case/my:
+    get:
+      tags:
+        - Дело
+      summary: "Получение основной информации о своих делах"
+      responses:
+        '200':
+          description: "Основная информация о своих делах: id, тип преступления, район, статус дела, маркер о том, создано ли им дело, и список id полицейских, которые потом перечисляются в виде списка неповторяющихся значений (основная информация со статусом на деле (снят, назначен))"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cases-with-min-policemen-and-unique-full'
+      security: 
+        - session: [major]
+  /auth/minor/person/list:
+    get:
+      tags:
+        - Человек
+      summary: Получение ориентировочной информации о всех людях (кроме себя) в системе
+      responses:
+        '200':
+          description: "Ориентировочная информация о всех людях (кроме себя) в системе: id, имя, дата рождения, раса"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/people'
+      security: 
+        - session: [minor]
+  /auth/minor/crime-case/available:
+    get:
+      tags:
+        - Дело
+      summary: Получение базовойинформации о делах, которые в статусе on_work, на которые полицейский назначен, и где он не отстранен
+      responses:
+        '200':
+          description: "Информация о таких делах: id, тип преступления и район"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/base-crime-cases'
+      security: 
+        - session: [minor]
+  /auth/minor/policeman/partners-in-case/{crime-id}:
+    get:
+      tags:
+        - Полицейский
+      summary: Получить основную информацию о партнерах по делу (кроме себя и снятых)
+      parameters:
+        - in: path
+          name: crime-id
+          required: true
+          schema:
+            type: integer
+            example: 2
+          description: id преступления, по которому ведется дело, по которому нужно получить основную информацию о партнерах
+      responses:
+        '200':
+          description: "Основная информация о всех полицейских (кроме себя) на деле со статусом на деле"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/case-policemen'
+        '404':
+          description: Дела с таким id нет
+        '403':
+          description: Не назначен на дело или снят с него
+      security: 
+        - session: [minor]
+  /auth/minor/note/in-case/{crime-id}:
+    get:
+      tags:
+        - Запись о деле
+      summary: Получить записи по делу
+      parameters:
+        - in: path
+          name: crime-id
+          required: true
+          schema:
+            type: integer
+            example: 2
+          description: id преступления, по которому ведется дело, по которому нужно получить записи
+      responses:
+        '200':
+          description: "Записи по делу от партнеров (и себя): id, id полицейского, запись и список уникальных авторов записей (в формате основной информации)"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/crime-notes'
+        '404':
+          description: Таких преступления или дела нет
+        '403':
+          description: Не назначен на дело или снят с него
+      security: 
+        - session: [minor]
+  /auth/minor/person-relevant-to-case/in-case/{crime-id}:
+    get:
+      tags:
+        - Участие человека в деле
+      summary: Получить информацию о людях, участвующих в деле
+      parameters:
+        - in: path
+          name: crime-id
+          required: true
+          schema:
+            type: integer
+            example: 2
+          description: id преступления, по которому ведется дело, по которому нужно получить людей в нем участвующих
+      responses:
+        '200':
+          description: "Информация о таких людях: id, имя, раса, отношение, запись о нем"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/base-case-people'
+        '404':
+          description: Такого преступления или дела нет
+        '403':
+          description: Не назначен на дело или снят с него
+      security: 
+        - session: [minor]
+
+components:
+  securitySchemes: 
+    session:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      flows: 
+        implicit: 
+          scopes: 
+            major: начальник, заведающий отделом
+            minor: обычный полицейский, находящийся в подчинении начальника
+      description: При выполнении входа добавляет в сессию информацию об этом, после этого в этой сессии можно выполнять запросы от своего имени
+
+  schemas:
+    case-state:
+      type: string
+      enum:
+        - on_work
+        - freeze
+        - close
+      example: on_work
+    person-relation:
+      type: string
+      enum:
+        - witness
+        - suspect
+      example: witness
+    policeman-case-status:
+      type: string
+      enum:
+        - assigned
+        - removed
+      example: assigned
+    race:
+      type: string
+      enum:
+        - samaran
+        - seolite
+        - occidental
+        - kojko
+        - modial
+        - perikarnassia
+        - messina
+        - oranje
+        - mesque
+        - vesper
+        - sur-la-clef
+        - ubi sent
+        - graad
+        - konigstein
+        - zsiemsk
+        - yugo-graad
+        - igaunija
+        - zemlya
+        - mirova
+        - ilmarran
+        - semenine
+        - revachol
+        - ozonne
+        - vaasa
+        - suru
+    rank:
+      type: string
+      enum:
+        - major
+        - minor
+      description: major - это начальник minor полицейского
+    login:
+      type: object
+      properties:
+        series:
+          type: string
+        password:
+          type: string
+      examples:
+        - series: 213e512d
+          password: a21brf12d1aasd1
+    crime-id:
+      type: object
+      properties:
+        crimeId:
+          type: integer
+      examples: 
+        - crimeId: 3
+    note-create:
+      type: object
+      properties:
+        crimeId:
+          type: integer
+        text:
+          type: string
+      examples:
+        - crimeId: 3
+          text: Нашли труп на Авенью стрит
+    put-policeman-on-case:
+      type: object
+      properties:
+        minorPolicemanId:
+          type: integer
+        crimeId:
+          type: integer
+        onCaseStatus:
+          $ref: '#/components/schemas/policeman-case-status'
+      examples:
+        - minorPolicemanId: 3
+          crimeId: 3
+          onCaseStatus: removed
+    add-person-to-case:
+      type: object
+      properties:
+        crimeId: 
+          type: integer
+        personId:
+          type: integer
+        relation:
+          $ref: '#/components/schemas/person-relation'
+      examples:
+        - crimeId: 3
+          personId: 3
+          relation: witness
+    put-person-to-case:
+      type: object
+      required: 
+        - crimeId
+        - personId
+      properties:
+        crimeId: 
+          type: integer
+        personId:
+          type: integer
+        relation:
+          $ref: '#/components/schemas/person-relation'
+        note:
+          type: string
+      examples:
+        - crimeId: 3
+          personId: 3
+          relation: suspect
+          note: Подозрительно много ходил у места преступления
+    person-id:
+      type: integer
+      examples: 
+        - 3
+    base-policeman:
+      type: object
+      properties:
+        name:
+          type: string
+        rank:
+          $ref: '#/components/schemas/rank'
+        series:
+          type: string
+        seriesDateOfIssue:
+          type: string
+          format: date-time
+      examples:
+        - name: Валера
+          rank: minor
+          series: 123e512d
+          seriesDateOfIssue: 2024-08-12T20:17:46.384Z
+    district:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    base-precinct:
+      type: object
+      properties:
+        number:
+          type: integer
+        districts:
+          type: array
+          items:
+            $ref: '#/components/schemas/district'
+      examples:
+        - number: 3
+          districts:
+            - id: 2
+              name: Старый Юг
+            - id: 3
+              name: Долина псов
+    no-context-policeman:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        series:
+          type: string
+        rank:
+          $ref: '#/components/schemas/rank'
+        seriesDateOfIssue:
+          type: string
+          format: date-time
+      examples:
+        - id: 29
+          name: Валера
+          series: 214e241d
+          rank: minor
+          seriesDateOfIssue: '2024-08-12T20:17:46.384Z'
+    no-context-policemen:
+      type: array
+      items:
+        $ref: '#/components/schemas/no-context-policeman'
+      examples:
+        - - id: 29
+            name: Валера
+            series: 214e241d
+            rank: minor
+            seriesDateOfIssue: '2024-08-12T20:17:46.384Z'
+          - id: 32
+            name: Алексей
+            series: 327e925d
+            rank: major
+            seriesDateOfIssue: '2025-04-23T14:28:10.502Z'
+          - id: 34
+            name: Елена
+            series: 518e232d
+            rank: minor
+            seriesDateOfIssue: '2023-11-05T08:45:21.731Z'
+    base-crime:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        district:
+          type: string
+        caseOpened:
+          type: boolean
+      examples:
+        - id: 3
+          type: Ограбление
+          district: Старый Юг
+          caseOpened: false
+    base-crimes:
+      type: array
+      items:
+        $ref: '#/components/schemas/base-crime'
+      examples:
+        - - id: 3
+            type: Ограбление
+            district: Старый Юг
+            caseOpened: false
+          - id: 6
+            type: Убийство
+            district: Долина псов
+            caseOpened: true
+          - id: 11
+            type: Вандализм
+            district: Долина псов
+            caseOpened: false
+    no-context-no-rank-policeman:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        series:
+          type: string
+        seriesDateOfIssue:
+          type: string
+          format: date-time
+      examples:
+        - id: 29
+          name: Валера
+          series: 214e241d
+          seriesDateOfIssue: '2024-08-12T20:17:46.384Z'
+    no-context-no-rank-policemen:
+      type: array
+      items:
+        $ref: '#/components/schemas/no-context-no-rank-policeman'
+      examples:
+        - - id: 29
+            name: Валера
+            series: 214e241d
+            seriesDateOfIssue: '2024-08-12T20:17:46.384Z'
+          - id: 32
+            name: Алексей
+            series: 327e925d
+            seriesDateOfIssue: '2025-04-23T14:28:10.502Z'
+          - id: 34
+            name: Елена
+            series: 518e232d
+            seriesDateOfIssue: '2023-11-05T08:45:21.731Z'
+    slave:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        series:
+          type: string
+        owns:
+          type: boolean
+        seriesDateOfIssue:
+          type: string
+          format: date-time
+      examples:
+        - id: 29
+          name: Валера
+          series: 214e241d
+          owns: true
+          seriesDateOfIssue: '2024-08-12T20:17:46.384Z'
+    slaves:
+      type: array
+      items:
+        $ref: '#/components/schemas/slave'
+      examples:
+        - - id: 29
+            name: Валера
+            series: 214e241d
+            owns: false
+            seriesDateOfIssue: '2024-08-12T20:17:46.384Z'
+          - id: 32
+            name: Алексей
+            series: 327e925d
+            owns: true
+            seriesDateOfIssue: '2025-04-23T14:28:10.502Z'
+          - id: 34
+            name: Елена
+            series: 518e232d
+            owns: true
+            seriesDateOfIssue: '2023-11-05T08:45:21.731Z'
+    min-policeman-on-case:
+      type: object
+      properties:
+        id:
+          type: integer
+        status:
+          $ref: '#/components/schemas/policeman-case-status'
+      examples:
+        - id: 29
+          state: removed
+    min-policemen-on-case:
+      type: array
+      items: 
+        $ref: '#/components/schemas/min-policeman-on-case'
+      examples:
+        - - id: 29
+            state: removed
+          - id: 32
+            state: assigned
+          - id: 34
+            state: assigned
+    case-with-min-policemen:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        district:
+          type: string
+        state:
+          $ref: '#/components/schemas/case-state'
+        owns:
+          type: boolean
+        slavesOnCase:
+          $ref: '#/components/schemas/min-policemen-on-case'
+      examples:
+        - id: 3
+          type: Ограбление
+          district: Старый Юг
+          state: on_work
+          owns: true
+          slavesOnCase: 
+            - id: 29
+              state: assigned
+    cases-with-min-policemen:
+      type: array
+      items:
+        $ref: '#/components/schemas/case-with-min-policemen'
+      examples:
+        - id: 3
+          type: Ограбление
+          district: Старый Юг
+          state: on_work
+          slavesOnCase: 
+            - id: 29
+              state: assigned
+        - id: 6
+          type: Убийство
+          district: Долина псов
+          state: freeze
+          slavesOnCase:
+            - id: 29
+              state: removed
+            - id: 32
+              state: assigned
+            - id: 34
+              state: assigned
+    cases-with-min-policemen-and-unique-full:
+      type: object
+      properties:
+        crimeCases:
+          type: array
+          items:
+            $ref: '#/components/schemas/case-with-min-policemen'
+        uniquePolicemen:
+          $ref: '#/components/schemas/slaves'
+      examples:
+        - crimeCases:
+          - id: 3
+            type: Ограбление
+            district: Старый Юг
+            state: on_work
+            owns: true
+            slavesOnCase: 
+              - id: 29
+                state: assigned
+          - id: 6
+            type: Убийство
+            district: Долина псов
+            state: freeze
+            owns: false
+            slavesOnCase:
+              - id: 29
+                state: removed
+              - id: 32
+                state: assigned
+              - id: 34
+                state: assigned
+          uniquePoliceman:
+              - id: 29
+                name: Валера
+                series: 214e241d
+                owns: false
+                seriesDateOfIssue: '2024-08-12T20:17:46.384Z'
+              - id: 32
+                name: Алексей
+                series: 327e925d
+                owns: true
+                seriesDateOfIssue: '2025-04-23T14:28:10.502Z'
+              - id: 34
+                name: Елена
+                series: 518e232d
+                owns: true
+                seriesDateOfIssue: '2023-11-05T08:45:21.731Z'
+    person:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        race:
+          $ref: '#/components/schemas/race'
+      examples:
+        - id: 12
+          name: Владимир
+          birthdate: '2006-08-12T20:17:46.384Z'
+          race: samaran
+    add-person:
+      type: object
+      properties:
+        name:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        race:
+          $ref: '#/components/schemas/race'
+      examples:
+        - name: Владимир
+          birthdate: '2006-08-12T20:17:46.384Z'
+          race: samaran
+    people:
+      type: array
+      items:
+        $ref: '#/components/schemas/person'    
+      examples:
+        - - id: 12
+            name: Владимир
+            birthdate: '2006-08-12T20:17:46.384Z'
+            race: samaran
+          - id: 542
+            name: Роман
+            birthdate: '2000-04-23T14:28:10.502Z'
+            race: messina  
+    base-crime-case:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        district:
+          type: string
+      examples:
+        - id: 3
+          type: Ограбление
+          district: Старый Юг
+    base-crime-cases:
+      type: array
+      items:
+          $ref: '#/components/schemas/base-crime-case'
+      examples:
+        - - id: 3
+            type: Ограбление
+            district: Старый Юг
+          - id: 6
+            type: Убийство
+            district: Долина псов
+    case-policeman:
+      type: object
+      properties:
+        id: 
+          type: integer
+        name:
+          type: string
+        series:
+          type: string
+        seriesDateOfIssue:
+          type: string
+          format: date-time
+        onCaseStatus:
+          $ref: '#/components/schemas/policeman-case-status'
+      examples:
+        - id: 29
+          name: Валера
+          series: 214e241d
+          seriesDateOfIssue: '2024-08-12T20:17:46.384Z'
+          onCaseStatus: assigned
+    case-policemen:
+      type: array
+      items:
+          $ref: '#/components/schemas/case-policeman'
+      examples:
+        - - id: 29
+            name: Валера
+            series: 214e241d
+            seriesDateOfIssue: '2024-08-12T20:17:46.384Z'
+            onCaseStatus: assigned
+          - id: 32
+            name: Алексей
+            series: 327e925d
+            seriesDateOfIssue: '2025-04-23T14:28:10.502Z'
+            onCaseStatus: removed
+          - id: 34
+            name: Елена
+            series: 518e232d
+            seriesDateOfIssue: '2023-11-05T08:45:21.731Z'
+            onCaseStatus: assigned
+    crime-note:
+      type: object
+      properties:
+        id:
+          type: integer
+        policemanId:
+          type: integer
+        note:
+          type: string
+      examples:
+        - id: 2
+          policemanId: 29
+          note: Найден труп на Авенью стрит
+    crime-notes:
+      type: array
+      items:
+          $ref: '#/components/schemas/crime-note'
+      examples:
+        - - id: 2
+            policemanId: 29
+            note: Найден труп на Авенью стрит
+          - id: 5
+            policemanId: 29
+            note: Еще один труп с таким же подчерком на заводе
+          - id: 8
+            policemanId: 32
+            note: У второго трупа видели человека в черной шляпе, он пытался скрыться
+    base-case-person:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        race:
+          $ref: '#/components/schemas/race'
+        relation:
+          $ref: '#/components/schemas/person-relation'
+        note:
+          type: string
+      examples:
+        - id: 4
+          name: Анастасия
+          race: messina
+          relation: witness
+          note: Проходила мимо места преступления - обнаружила первый труп
+    base-case-people:
+      type: array
+      items:
+        $ref: '#/components/schemas/base-case-person'
+      examples:
+        - - id: 4
+            name: Анастасия
+            race: messina
+            relation: witness
+            note: Проходила мимо места преступления - обнаружила первый труп
+          - id: 7
+            name: Илья
+            race: oranje
+            relation: witness
+            note: Проходил мимо места преступления - обнаружил второй труп и описал подозрительно спешащего человека, уходящего от места преступления
