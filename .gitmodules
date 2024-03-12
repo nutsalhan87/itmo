@@ -1,6 +1,0 @@
-[submodule "os/lab1"]
-	path = os/lab1
-	url = https://github.com/nutsalhan87/monitor
-[submodule "os/lab2"]
-	path = os/lab2
-	url = https://github.com/nutsalhan87/proc-top
