@@ -1,6 +1,8 @@
 package ru.nutsalhan87.swt.domain;
 
 import lombok.Getter;
+import ru.nutsalhan87.swt.domain.exception.FullEnergyException;
+import ru.nutsalhan87.swt.domain.exception.TiredException;
 
 @Getter
 public abstract class IntelligentCreature {
@@ -12,24 +14,18 @@ public abstract class IntelligentCreature {
         this.energy = Energy.FULL;
     }
 
-    boolean tryWork() {
-        return switch (this.energy) {
-            case LOW -> false;
-            case FULL -> {
-                this.energy = Energy.LOW;
-                yield true;
-            }
-        };
+    void work() throws TiredException {
+        switch (this.energy) {
+            case LOW -> throw new TiredException(this);
+            case FULL -> this.energy = Energy.LOW;
+        }
     }
 
-    boolean trySleep() {
-        return switch (this.energy) {
-            case LOW -> {
-                this.energy = Energy.FULL;
-                yield true;
-            }
-            case FULL -> false;
-        };
+    void sleep() throws FullEnergyException {
+        switch (this.energy) {
+            case LOW -> this.energy = Energy.FULL;
+            case FULL -> throw new FullEnergyException(this);
+        }
     }
 
     enum Energy {

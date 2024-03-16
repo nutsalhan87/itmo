@@ -7,7 +7,9 @@ public class Sec {
         long group = Math.round(x / Math.PI);
         long modifier = group % 2 == 0 ? 1 : -1;
         x = Math.abs(group == 0 ? x : x - Math.PI * group);
-        if (x < Math.PI / 4) {
+        if (Double.compare(x, Math.PI / 2) == 0) {
+            return Double.NaN;
+        } else if (x < Math.PI / 4) {
             return secNearZero(x) * modifier;
         } else {
             return secNearPi2(x) * modifier;
