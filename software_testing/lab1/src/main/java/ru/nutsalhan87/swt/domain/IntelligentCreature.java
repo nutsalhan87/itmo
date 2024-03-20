@@ -21,14 +21,14 @@ public abstract class IntelligentCreature {
         }
     }
 
-    void sleep() throws FullEnergyException {
+    public void sleep() throws FullEnergyException {
         switch (this.energy) {
             case LOW -> this.energy = Energy.FULL;
             case FULL -> throw new FullEnergyException(this);
         }
     }
 
-    enum Energy {
+    public enum Energy {
         LOW,
         FULL
     }
