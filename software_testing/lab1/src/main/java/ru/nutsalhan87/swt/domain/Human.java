@@ -21,14 +21,14 @@ public class Human extends IntelligentCreature {
         this.location = location;
     }
 
-    void move(Location location) throws NoSpaceSuitException {
+    public void move(Location location) throws NoSpaceSuitException {
         if (location == Location.EXTERIOR && this.clothes != Clothes.SPACE_SUIT) {
             throw new NoSpaceSuitException(this);
         }
         this.location = location;
     }
 
-    void wear(Clothes clothes) {
+    public void wear(Clothes clothes) {
         this.clothes = clothes;
     }
 
