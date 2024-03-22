@@ -40,29 +40,29 @@ public class DomainTest {
 
     @ParameterizedTest
     @ValueSource(classes = {Human.class, Location.class, Magazine.class, Computer.class, Article.class})
-    void article(Class c){
+    void article(Class<?> clazz) {
         //проверяем возможность написания статей по необщим темам
         var ford = new Human("Ford", 33, Location.CREW_QUARTERS);
         var computer = new Computer(Computer.MAC.random());
-        Assertions.assertEquals(c.getSimpleName(), computer.writeArticle(ford, c).toString());
+        Assertions.assertEquals(clazz.getSimpleName(), computer.writeArticle(ford, clazz).toString());
 
         var stanford = new Human("Stanford", 33, Location.CREW_QUARTERS);
-        Assertions.assertEquals(stanford, computer.writeArticle(stanford, c).getAuthor());
+        Assertions.assertEquals(stanford, computer.writeArticle(stanford, clazz).getAuthor());
     }
 
     @Test
-    void spacesuit(){
+    void spacesuit() {
         //проверяем, что за пределы корабля без скафандра не выйти
         var ford = new Human("Ford", 33, Location.CREW_QUARTERS);
         Assertions.assertThrows(NoSpaceSuitException.class, () -> ford.move(Location.EXTERIOR));
 
         //надеваем скафандр и снова проверяем
         ford.wear(Human.Clothes.SPACE_SUIT);
-        Assertions.assertAll(()->ford.move(Location.EXTERIOR));
+        Assertions.assertAll(() -> ford.move(Location.EXTERIOR));
     }
 
     @Test
-    void energy(){
+    void energy() {
         var ford = new Human("Ford", 33, Location.CREW_QUARTERS);
         var computer = new Computer(Computer.MAC.random());
         Assertions.assertThrows(FullEnergyException.class, ford::sleep);
@@ -71,14 +71,14 @@ public class DomainTest {
         computer.writeArticle(ford, Human.class);
         Assertions.assertEquals(ford.getEnergy(), IntelligentCreature.Energy.LOW);
 
-        Assertions.assertThrows(TiredException.class, ()->computer.writeArticle(ford, Magazine.class));
+        Assertions.assertThrows(TiredException.class, () -> computer.writeArticle(ford, Magazine.class));
 
         Assertions.assertAll(ford::sleep);
         Assertions.assertEquals(ford.getEnergy(), IntelligentCreature.Energy.FULL);
     }
 
     @Test
-    void human_creation(){
+    void humanCreation() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Human("Toddler", -1, Location.BRIDGE));
 
         var ford = new Human("Ford", 33, Location.EXTERIOR);
