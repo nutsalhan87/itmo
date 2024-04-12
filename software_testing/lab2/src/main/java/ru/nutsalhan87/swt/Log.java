@@ -10,7 +10,19 @@ class Log implements BiFunction<Double, Double, Double> {
 
     @Override
     public Double apply(Double x, Double n) {
-        // TODO: проверить на особые случаи и вернуть соответствующие занчения
+        if(n==1){
+            return Double.POSITIVE_INFINITY;
+        }
+        else if(n<=0){
+            return  Double.NaN;
+        }
+        else if(x==0){
+            return  Double.NEGATIVE_INFINITY;
+        }
+        else if(x<0){
+            return Double.NaN;
+        }
+
         return lnF.apply(x) / lnF.apply(n);
     }
 }
