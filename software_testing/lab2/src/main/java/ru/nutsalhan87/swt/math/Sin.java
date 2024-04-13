@@ -1,12 +1,18 @@
-package ru.nutsalhan87.swt;
+package ru.nutsalhan87.swt.math;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import ru.nutsalhan87.swt.util.PowTriplet;
 
-import java.util.function.Function;
+import java.util.List;
+import java.util.stream.IntStream;
 
 @NoArgsConstructor
-class Sin implements Function<Double, Double> {
-    private static final Pow powF = new Pow();
+@AllArgsConstructor
+public class Sin implements Function {
+    private List<PowTriplet> pows = IntStream.range(0, 11).
+            mapToObj(i -> new PowTriplet(i, (i / 2) % 2 == 0 ? 1 : -1, new Pow(i))).
+            toList();
     private static final Double oneDivSqrtTwo = 0.7071067811865475244008443621048490392848359376884740365883398689;
 
     @Override
@@ -38,19 +44,18 @@ class Sin implements Function<Double, Double> {
         int divider = 1;
         double ans = 0;
         double argShift = x - (Constants.PI / 4);
-        for (int power = 0; power < 11; ++power) {
-            if (power != 0) {
-                divider *= power;
+        for (var pair : pows) {
+            if (pair.power() != 0) {
+                divider *= pair.power();
             }
-            if ((power / 2) % 2 == 0) {
-                ans += oneDivSqrtTwo * powF.apply(argShift, power) / divider;
-            } else {
-                ans += -oneDivSqrtTwo * powF.apply(argShift, power) / divider;
-            }
+            ans += oneDivSqrtTwo * pair.sign() * pair.pow().apply(argShift) / divider;
         }
 
         return ans;
     }
 
-
+    @Override
+    public String getName() {
+        return "sin";
+    }
 }

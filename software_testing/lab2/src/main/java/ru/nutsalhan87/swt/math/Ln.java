@@ -1,14 +1,18 @@
-package ru.nutsalhan87.swt;
+package ru.nutsalhan87.swt.math;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import ru.nutsalhan87.swt.util.PowTriplet;
 
-import java.util.function.Function;
+import java.util.List;
 import java.util.stream.IntStream;
 
 @NoArgsConstructor
-class Ln implements Function<Double, Double> {
-    private static final Pow powF = new Pow();
+@AllArgsConstructor
+public class Ln implements Function {
+    private List<PowTriplet> pows = IntStream.range(1, 65 + 1).
+            mapToObj(i -> new PowTriplet(i, i % 2 == 0 ? 1 : -1, new Pow(i))).
+            toList();
     private static final Double ln10 = 2.3025850929940456840179914546843642076011014886287729760333279009;
 
     @Override
@@ -28,17 +32,21 @@ class Ln implements Function<Double, Double> {
     }
 
     private Double lnSeriesAtZero(Double x) {
-        return -IntStream.range(1, 40 + 1).mapToDouble(k -> {
-            int sign = k % 2 == 0 ? 1 : -1;
-            return sign * powF.apply(x - 1, k) / k;
-        }).sum();
+        return -pows.stream().
+                mapToDouble(triplet -> triplet.sign() * triplet.pow().apply(x - 1) / triplet.power()).
+                sum();
     }
 
-    @ToString
+    @Override
+    public String getName() {
+        return "ln";
+    }
+
     private static class DoubleRepresentation {
         private final boolean isPositive;
         private final int exponent;
         private final double mantissa;
+        private final Pow pow;
 
         public DoubleRepresentation(Double x) {
             this.isPositive = x >= 0.;
@@ -58,11 +66,12 @@ class Ln implements Function<Double, Double> {
 
             this.exponent = exponent;
             this.mantissa = x;
+            this.pow = new Pow(exponent);
         }
 
         public double reconstruct() {
             int sign = isPositive ? 1 : -1;
-            return sign * mantissa * powF.apply(10., exponent);
+            return sign * mantissa * pow.apply(10.);
         }
     }
 }
