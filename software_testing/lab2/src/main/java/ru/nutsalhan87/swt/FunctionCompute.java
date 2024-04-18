@@ -12,6 +12,7 @@ public class FunctionCompute implements Function {
     private Function ln;
     private Function log3;
     private Function log5;
+    private String name;
 
     // x <= 0 : ((tan(x) - csc(x)) * sec(x))
     // x > 0 : (((((log_5(x) / ln(x)) + log_3(x)) / log_3(x)) ^ 3) + (log_3(x) - (log_5(x) / ln(x))))
@@ -42,5 +43,10 @@ public class FunctionCompute implements Function {
             double ans = p1 + p2 + p3;
             return ans;
         }
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

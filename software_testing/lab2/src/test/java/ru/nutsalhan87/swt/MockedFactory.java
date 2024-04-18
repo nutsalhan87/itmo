@@ -7,10 +7,9 @@ import ru.nutsalhan87.swt.util.Pair;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.Mockito.when;
@@ -23,41 +22,102 @@ public class MockedFactory {
             Double x = invocationOnMock.getArgument(0);
             Double y = map.get(x);
             if (y == null) {
-                throw new IllegalArgumentException("x must be from table, but x = " + x);
+                throw new IllegalArgumentException(function.getName() + " x must be from table, but x = " + x);
             }
             return y;
         });
+        when(mocked.getName()).thenReturn("mocked " + function.getName());
         return new Pair<>(mocked, map.keySet());
     }
 
-    public static Pair<FunctionCompute, Set<Double>> mockedFunctionCompute() throws IOException {
-        var pow3 = mock(new Pow(3));
-        var tg = mock(new Tg());
-        var cosec = mock(new Cosec());
-        var sec = mock(new Sec());
+    public static Pair<FunctionCompute, Set<Double>> mockedLogFunctionCompute() throws IOException {
+        var pow3 = new Pow(3);
+        var tg = new Tg();
+        var cosec = new Cosec();
+        var sec = new Sec();
         var ln = mock(new Ln());
         var log3 = mock(new Log(3));
         var log5 = mock(new Log(5));
 
-        var commonValueSet = new HashSet<>(pow3.s());
-        commonValueSet.retainAll(tg.s());
-        commonValueSet.retainAll(cosec.s());
-        commonValueSet.retainAll(sec.s());
+        var commonValueSet = new HashSet<>(ln.s());
         commonValueSet.retainAll(ln.s());
         commonValueSet.retainAll(log3.s());
         commonValueSet.retainAll(log5.s());
 
         var functionCompute = new FunctionCompute(
-                pow3.f(),
-                tg.f(),
-                cosec.f(),
-                sec.f(),
+                pow3,
+                tg,
+                cosec,
+                sec,
                 ln.f(),
                 log3.f(),
-                log5.f()
+                log5.f(),
+                "log mocked function"
         );
 
         return new Pair<>(functionCompute, commonValueSet);
+    }
+
+    public static Pair<FunctionCompute, Set<Double>> mockedTrigonometryFunctionCompute() throws IOException {
+        var pow3 = new Pow(3);
+        var tg = mock(new Tg());
+        var cosec = mock(new Cosec());
+        var sec = mock(new Sec());
+        var ln = new Ln();
+        var log3 = new Log(3);
+        var log5 = new Log(5);
+
+        var commonValueSet = new HashSet<>(tg.s());
+        commonValueSet.retainAll(cosec.s());
+        commonValueSet.retainAll(sec.s());
+
+        var functionCompute = new FunctionCompute(
+                pow3,
+                tg.f(),
+                cosec.f(),
+                sec.f(),
+                ln,
+                log3,
+                log5,
+                "trigonometry mocked function"
+        );
+
+        return new Pair<>(functionCompute, commonValueSet);
+    }
+
+    public static List<Pair<FunctionCompute, Set<Double>>> mockedFunctionComputeCombination() throws IOException {
+        var functions = Stream.of(new Object[][] {
+                { "pow3", new Pow(3) },
+                { "tg", new Tg() },
+                { "cosec", new Cosec() },
+                { "sec", new Sec() },
+                { "ln", new Ln() },
+                { "log3", new Log(3) },
+                { "log5", new Log(5) },
+        }).collect(Collectors.toMap(data -> (String) data[0], data -> (Function) data[1]));
+
+        List<Pair<FunctionCompute, Set<Double>>> mockedFunctionComputes = new ArrayList<>();
+        for (String s : functions.keySet()) {
+            if (s.equals("pow3")) {
+                continue;
+            }
+            var mockedFunctions = new HashMap<>(functions);
+            var functionAndValues = mock(functions.get(s));
+            mockedFunctions.put(s, functionAndValues.f());
+            var functionCompute = new FunctionCompute(
+                    mockedFunctions.get("pow3"),
+                    mockedFunctions.get("tg"),
+                    mockedFunctions.get("cosec"),
+                    mockedFunctions.get("sec"),
+                    mockedFunctions.get("ln"),
+                    mockedFunctions.get("log3"),
+                    mockedFunctions.get("log5"),
+                    s + " unmocked function"
+            );
+            var apply = new Pair<>(functionCompute, functionAndValues.s());
+            mockedFunctionComputes.add(apply);
+        }
+        return mockedFunctionComputes;
     }
 
     private static TreeMap<Double, Double> readFile(String filename) throws IOException {

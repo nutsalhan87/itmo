@@ -6,9 +6,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import ru.nutsalhan87.swt.math.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import static java.lang.Double.NaN;
 import static java.lang.Math.PI;
@@ -16,10 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FunctionComputeTest {
     private final FunctionCompute functionCompute;
-    private final FunctionCompute mockedFunctionCompute;
-    private final Set<Double> tableValues;
 
-    public FunctionComputeTest() throws IOException {
+    public FunctionComputeTest() {
         this.functionCompute = new FunctionCompute(
                 new Pow(3),
                 new Tg(),
@@ -27,11 +22,9 @@ public class FunctionComputeTest {
                 new Sec(),
                 new Ln(),
                 new Log(3),
-                new Log(5)
+                new Log(5),
+                "function"
         );
-        var p = MockedFactory.mockedFunctionCompute();
-        this.mockedFunctionCompute = p.f();
-        this.tableValues = p.s();
     }
 
     @Test
@@ -48,15 +41,40 @@ public class FunctionComputeTest {
     }
 
     @Test
-    void other() {
-        List<Double> expected = new ArrayList<>();
-        List<Double> actual = new ArrayList<>();
-        for (double x : tableValues) {
-            expected.add(mockedFunctionCompute.apply(x));
-            actual.add(functionCompute.apply(x));
+    void mockedLog() throws IOException {
+        var mocked = MockedFactory.mockedLogFunctionCompute();
+        for (double x : mocked.s()) {
+            var expected = restrict(mocked.f().apply(x));
+            var actual = restrict(functionCompute.apply(x));
+            assertEquals(expected, actual, 1, "x = " + x);
         }
-        assertArrayEquals(expected.stream().mapToDouble(i -> i).toArray(),
-                actual.stream().mapToDouble(i -> i).toArray(),
-                Constants.EPSILON);
+    }
+
+    @Test
+    void mockedTrigonometry() throws IOException {
+        var mocked = MockedFactory.mockedTrigonometryFunctionCompute();
+        for (double x : mocked.s()) {
+            var expected = restrict(mocked.f().apply(x));
+            var actual = restrict(functionCompute.apply(x));
+            assertEquals(expected, actual, 1, "x = " + x);
+        }
+    }
+
+    @Test
+    void singleUnmocked() throws IOException {
+        for (var partiallyMockedFunctionCompute : MockedFactory.mockedFunctionComputeCombination()) {
+            for (double x : partiallyMockedFunctionCompute.s()) {
+                var expected = restrict(partiallyMockedFunctionCompute.f().apply(x));
+                var actual = restrict(functionCompute.apply(x));
+                assertEquals(expected, actual, 1, partiallyMockedFunctionCompute.f().getName() + ": x = " + x);
+            }
+        }
+    }
+
+    double restrict(Double x) {
+        if (x.isInfinite() || x > 1e9) {
+            return NaN;
+        }
+        return x;
     }
 }

@@ -1,11 +1,14 @@
 package ru.nutsalhan87.swt;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import ru.nutsalhan87.swt.math.*;
+import ru.nutsalhan87.swt.util.CSV;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
@@ -15,6 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class MathTest {
+    @BeforeAll
+    public static void createOutCsvDir() {
+        var csvDir = new File("out_csv");
+        csvDir.mkdir();
+    }
+
     abstract static class FunctionTest {
         protected final Function f;
         protected final Function fMocked;
@@ -27,7 +36,8 @@ public class MathTest {
         }
 
         @Test
-        void other() {
+        void other() throws IOException {
+            var csv = new CSV<>(f);
             for (double x : tableValues) {
                 var expected = fMocked.apply(x);
                 if (isFinite(expected) && expected > 1e12) {
@@ -37,8 +47,10 @@ public class MathTest {
                 if (!isFinite(actual)) {
                     actual = NaN;
                 }
+                csv.saveComputed(x);
                 assertEquals(expected, actual, 0.005, "x = " + x);
             }
+            csv.saveToFile();
         }
     }
 

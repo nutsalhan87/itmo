@@ -1,28 +1,14 @@
 package ru.nutsalhan87.swt.util;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.nutsalhan87.swt.math.Sin;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class CSVTest {
-    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-    public CSVTest() {
-        System.setOut(new PrintStream(out));
-    }
-
-    @BeforeEach
-    void clearOut() {
-        out.reset();
-    }
-
     @Test
     void test() {
         var sin = new Sin();
@@ -32,8 +18,8 @@ public class CSVTest {
             xy.add(new Pair<>(x, sin.apply(x)));
             csv.saveComputed(x);
         }
-        csv.print();
-        var outputted = out.toString().lines().skip(1).map(line -> {
+        var out = csv.format();
+        var outputted = out.lines().skip(1).map(line -> {
             var doubles = line.split(",");
             Double x = Double.parseDouble(doubles[0]), y = Double.parseDouble(doubles[1]);
             return new Pair<>(x, y);
