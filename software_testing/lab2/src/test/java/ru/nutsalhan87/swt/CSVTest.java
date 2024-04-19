@@ -1,7 +1,9 @@
-package ru.nutsalhan87.swt.util;
+package ru.nutsalhan87.swt;
 
 import org.junit.jupiter.api.Test;
 import ru.nutsalhan87.swt.math.Sin;
+import ru.nutsalhan87.swt.util.CSV;
+import ru.nutsalhan87.swt.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -86,8 +86,8 @@ public class MockedFactory {
     }
 
     public static List<Pair<FunctionCompute, Set<Double>>> mockedFunctionComputeCombination() throws IOException {
+        var pow3 = new Pow(3);
         var functions = Stream.of(new Object[][] {
-                { "pow3", new Pow(3) },
                 { "tg", new Tg() },
                 { "cosec", new Cosec() },
                 { "sec", new Sec() },
@@ -98,14 +98,11 @@ public class MockedFactory {
 
         List<Pair<FunctionCompute, Set<Double>>> mockedFunctionComputes = new ArrayList<>();
         for (String s : functions.keySet()) {
-            if (s.equals("pow3")) {
-                continue;
-            }
             var mockedFunctions = new HashMap<>(functions);
             var functionAndValues = mock(functions.get(s));
             mockedFunctions.put(s, functionAndValues.f());
             var functionCompute = new FunctionCompute(
-                    mockedFunctions.get("pow3"),
+                    pow3,
                     mockedFunctions.get("tg"),
                     mockedFunctions.get("cosec"),
                     mockedFunctions.get("sec"),
