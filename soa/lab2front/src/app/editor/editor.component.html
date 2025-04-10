@@ -1,0 +1,42 @@
+<div class="row gy-2 mt-2">
+    <span class="col-12 display-6">
+        @if (id === null) {
+        Создание нового транспорта
+        } @else {
+        Редактирование транспорта
+        }
+    </span>
+    @for (column of vehicleOmitIdKeys; track column) {
+    <div class="col-12 col-md-6 vstack gap-1">
+        <form class="input-group" [formGroup]="vehicle">
+            <span class="input-group-text">{{ tcav[column].header }}</span>
+            @if (tcav[column].inputType == "number" || tcav[column].inputType == "text") {
+            <input [type]="tcav[column].inputType" class="form-control me-auto"
+                [class.is-invalid]="vehicle.controls[column].invalid" [formControlName]="column">
+            } @else {
+            <select class="form-select" [formControlName]="column">
+                @for (optionValue of tcav[column].inputType[1]; track $index) {
+                <!-- handtype: assume that inputType == "select" is only for VehicleType -->
+                <option [value]="optionValue">{{ getDisplayVehicleType(optionValue) }}</option>
+                }
+            </select>
+            }
+            <button class="btn border">
+                <app-info [body]="tcav[column].helperMessage"></app-info>
+            </button>
+        </form>
+    </div>
+    }
+</div>
+<div class="hstack gap-2 mt-2">
+    @if (id != null) {
+    <button class="btn btn-danger ms-auto" (click)="deleteVehicle()">Удалить</button>
+    }
+    <button class="btn btn-success" [class.ms-auto]="id === null" [disabled]="!vehicle.valid" (click)="submitVehicle()">
+        @if (id === null) {
+        Создать
+        } @else {
+        Сохранить
+        }
+    </button>
+</div>

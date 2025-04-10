@@ -1,0 +1,355 @@
+openapi: 3.0.0
+info:
+  title: Vehicle Helper API
+  description: API определяющий ряд дополнительных операций, связанных с Vehicle API
+  version: 1.2.0
+servers:
+  - url: /api/v1/shop
+paths:
+  /vehicles/search/by-number-of-wheels/{from}/{to}:
+    get:
+      summary: Найти транспортные средства по числу колёс в диапазоне
+      tags:
+        - vehicles
+      description: Возвращает массив транспортных средств с числом колёс в заданном диапазоне
+      parameters:
+        - name: from
+          in: path
+          description: От включительно
+          required: true
+          schema:
+            $ref: '#/components/schemas/VehicleNumberOfWheels'
+        - name: to
+          in: path
+          description: До включительно
+          required: true
+          schema:
+            $ref: '#/components/schemas/VehicleNumberOfWheels'
+      responses:
+        '200':
+          description: Успешная операция
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleAllFieldsExistedRestricted'
+        '400':
+          description: Некорректные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestAnswer'
+        '422':
+          description: Данные не прошли валидацию
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongPropertiesAnswer'
+        '500':
+          description: Внутренняя ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+              example:
+                  timestamp: 2024-10-13T19:49:21.062+00:00
+                  status: 500
+                  error: Internal Server Error
+                  path: /vehicles/search/by-number-of-wheels/1/2
+        '503':
+          description: Сервис недоступен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+              example:
+                timestamp: 2024-10-13T19:49:21.062+00:00
+                status: 503
+                error: Service Unavaliable
+                path: /vehicles/search/by-number-of-wheels/1/2
+
+  /vehicles/fix-distance/{id}:
+    patch:
+      summary: Сбросить пробег транспортного средства
+      tags:
+        - vehicles
+      description: Сбрасывает счётчик пробега транспортного средства до нуля.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/VehicleId'
+      responses:
+        '204':
+          description: Пробег успешно сброшен
+        '400':
+          description: Некорректные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestAnswer'
+        '404':
+          description: Транспортное средство не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleNotFoundAnswer'
+        '422':
+          description: Данные не прошли валидацию
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongPropertiesAnswer'
+        '500':
+          description: Внутренняя ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+              example:
+                  timestamp: 2024-10-13T19:49:21.062+00:00
+                  status: 500
+                  error: Internal Server Error
+                  path: /vehicles/fix-distance/1
+        '503':
+          description: Сервис недоступен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+              example:
+                timestamp: 2024-10-13T19:49:21.062+00:00
+                status: 503
+                error: Service Unavaliable
+                path: /vehicles/fix-distance/1
+              
+components:
+  schemas:
+    VehicleUserSetFields:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/VehicleName'
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        enginePower:
+          $ref: '#/components/schemas/VehicleEnginePower'
+        numberOfWheels:
+          $ref: '#/components/schemas/VehicleNumberOfWheels'
+        distanceTravelled:
+          $ref: '#/components/schemas/VehicleDistanceTravelled'
+        type:
+          $ref: '#/components/schemas/VehicleType'
+    
+    VehicleUserSetFieldsExistedRestricted:
+      allOf:
+        - $ref: '#/components/schemas/VehicleUserSetFields'
+        - required:
+          - name
+          - coordinates
+          - enginePower
+          - numberOfWheels
+          - distanceTravelled
+          - type
+    
+    VehicleAllFieldsNoId:
+      allOf:
+        - type: object
+          properties:
+            creationDate:
+              $ref: '#/components/schemas/VehicleCreationDate'
+        - $ref: '#/components/schemas/VehicleUserSetFields'
+    
+    VehicleAllFieldsNoIdExistedRestricted:
+      allOf:
+        - $ref: '#/components/schemas/VehicleAllFieldsNoId'
+        - required:
+          - name
+          - coordinates
+          - creationDate
+          - enginePower
+          - numberOfWheels
+          - distanceTravelled
+          - type
+    
+    VehicleAllFields:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/VehicleId'
+            creationDate:
+              $ref: '#/components/schemas/VehicleCreationDate'
+        - $ref: '#/components/schemas/VehicleUserSetFields'
+        
+    VehicleAllFieldsExistedRestricted:
+      allOf:
+        - $ref: '#/components/schemas/VehicleAllFields'
+        - required:
+          - id
+          - name
+          - coordinates
+          - creationDate
+          - enginePower
+          - numberOfWheels
+          - distanceTravelled
+          - type  
+    
+    VehicleId:
+      description: Уникальный идентификатор транспортного средства
+      type: number
+      format: int64
+      minimum: 1
+      example: 123
+    
+    VehicleName: 
+      description: Название транспортного средства
+      type: string
+      minLength: 1
+      example: Kia Rio
+    
+    Coordinates:
+      type: object
+      properties:
+        x:
+          $ref: '#/components/schemas/CoordinateX'
+        y:
+          $ref: '#/components/schemas/CoordinateY'
+      required: 
+        - x
+        - y
+    
+    VehicleCreationDate:
+      description: Дата создания транспортного средства
+      type: string
+      format: yyyy-MM-dd
+      example: 2007-12-03
+    
+    VehicleEnginePower:
+      description: Сила мотора транспортного средства в лошадиных силах
+      type: number
+      format: int32
+      minimum: 1
+      example: 200
+    
+    VehicleDistanceTravelled:
+      description: Кол-во километров, которое преодолело транспортное средство в километрах (пробег)
+      type: number
+      format: int32
+      minimum: 1
+      example: 11003
+    
+    VehicleNumberOfWheels:
+      description: Кол-во колес у транспортного средства
+      type: number
+      example: 4
+    
+    VehicleType:
+      type: string
+      description: Тип транспортного средства
+      enum:
+        - HELICOPTER
+        - DRONE
+        - SHIP
+        - BICYCLE
+        - CHOPPER
+    
+    CoordinateX:
+      description: Координата X
+      type: number
+      format: float64
+      example: 31412
+    
+    CoordinateY:
+      description: Координата Y
+      type: number
+      format: float64
+      maximum: 126
+      example: 100
+    
+    WrongPropertiesAnswer:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+          example: 2024-10-13T19:49:21.062+00:00
+        status:
+          type: number
+          example: 422
+        error:
+          type: string
+          example: Internal Server Error
+        path:
+          type: string
+          example: /vehicles
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field: 
+                type: string
+                example: id
+              value:
+                type: string
+                example: Id должен быть больше 0
+    
+    BadRequestAnswer:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+          example: 2024-10-13T19:49:21.062+00:00
+        status:
+          type: number
+          enum: 
+            - 400
+        error:
+          type: string
+          example: Bad Request
+        path:
+          type: string
+          example: /vehicles
+          
+    VehicleNotFoundAnswer:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+          example: 2024-10-13T19:49:21.062+00:00
+        status:
+          type: number
+          enum: 
+            - 404
+        error:
+          type: string
+          example: Not Found
+        path:
+          type: string
+          example: /vehicles
+        details:
+          type: string
+          example: Транспортного средства с таким id не найдено
+    
+    ServerErrorAnswer:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+          example: 2024-10-13T19:49:21.062+00:00
+        status:
+          type: string
+          pattern: 5\d\d
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        path:
+          type: string
+          example: /vehicles

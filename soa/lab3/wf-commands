@@ -1,0 +1,11 @@
+/subsystem=elytron/key-store=httpsKS:add(path=../../../c/keystore.jks,relative-to=jboss.server.config.dir,credential-reference={clear-text=secret},type=JKS)
+/subsystem=elytron/key-manager=httpsKM:add(key-store=httpsKS,credential-reference={clear-text=secret})
+/subsystem=elytron/server-ssl-context=httpsSSC:add(key-manager=httpsKM,protocols=["TLSv1.2"])
+batch
+/subsystem=undertow/server=default-server/https-listener=https:undefine-attribute(name=security-realm)
+/subsystem=undertow/server=default-server/https-listener=https:write-attribute(name=ssl-context,value=httpsSSC)
+run-batch
+reload
+
+/subsystem=ejb3/strict-max-bean-instance-pool=vehicle-service-pool:add(max-pool-size=30, timeout=5, timeout-unit=MINUTES)
+

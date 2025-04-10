@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-sm bg-body-tertiary shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand mb-0 h1">Vehicler</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <a class="nav-link active" routerLink="/table" routerLinkActive="active">Таблица</a>
+        <a class="nav-link" routerLink="/instruments" routerLinkActive="active">Инструменты</a>
+        <a class="nav-link" routerLink="/editor" routerLinkActive="active">Редактор</a>
+        <a class="nav-link" routerLink="/settings" routerLinkActive="active">Настройки</a>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+<div class="position-static">
+  <app-notifications class="toast-container bottom-0 start-0 p-3"></app-notifications>
+</div>

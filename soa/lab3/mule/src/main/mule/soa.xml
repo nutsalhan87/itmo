@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:apikit-soap="http://www.mulesoft.org/schema/mule/apikit-soap" xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+    http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+    http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+    http://www.mulesoft.org/schema/mule/apikit-soap http://www.mulesoft.org/schema/mule/apikit-soap/current/mule-apikit-soap.xsd
+    http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+	http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+	http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
+
+    <configuration-properties doc:name="Configuration properties" doc:id="ad7f5a56-17b0-4cdd-a567-d862b660e16c" file="local.properties" />
+
+    <http:listener-config name="HTTPS_Listener_config" doc:name="HTTP Listener config" doc:id="81b5c0f5-dcb5-45b3-903e-3a28c9c5ccd7" >
+        <http:listener-connection host="${https.listener.host}" port="${https.listener.port}" readTimeout="3000" protocol="HTTPS">
+            <tls:context >
+                <tls:key-store type="jks" path="${cert.path}" alias="localhost" keyPassword="secret" password="secret" />
+            </tls:context>
+        </http:listener-connection>
+		<http:listener-interceptors >
+			<http:cors-interceptor >
+				<http:origins >
+					<http:origin url="*" accessControlMaxAge="30000" />
+					<http:public-resource />
+				</http:origins>
+			</http:cors-interceptor>
+		</http:listener-interceptors>
+    </http:listener-config>
+
+    <wsc:config name="Web_Service_Consumer_Config" doc:name="Web Service Consumer Config" doc:id="67ffcd80-a85e-48a9-ac8e-eb294967afcf" >
+		<wsc:connection wsdlLocation="${soap.service.url}?wsdl" service="VehicleWebServiceService" port="VehicleWebServicePort" address="${soap.service.url}" >
+			<wsc:custom-transport-configuration >
+				<wsc:http-transport-configuration requesterConfig="HTTP_Request_configuration" />
+			</wsc:custom-transport-configuration>
+			<wsc:web-service-security actor="http://schemas.xmlsoap.org/soap/actor/next">
+			</wsc:web-service-security>
+		</wsc:connection>
+	</wsc:config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="5c0caa9d-799b-4156-967b-28de38f0b0f6" >
+		<http:request-connection protocol="HTTPS" >
+			<tls:context >
+				<tls:trust-store path="${cert.path}" password="secret" type="jks" />
+				<tls:key-store type="jks" path="${cert.path}" alias="localhost" keyPassword="secret" password="secret" />
+			</tls:context>
+		</http:request-connection>
+	</http:request-config>
+	<flow name="shopFlow">
+        <http:listener doc:name="HTTP Listener" config-ref="HTTPS_Listener_config" path="/api/v1/shop/*" >
+			<http:response statusCode="#[vars.httpStatus]" />
+			<http:error-response statusCode="#[vars.httpStatus]" />
+		</http:listener>
+		<choice doc:name="Choice">
+            <!-- Condition for GET /vehicles/search/by-number-of-wheels/{from}/{to} -->
+            <when expression="#[(attributes.method == 'GET') and (attributes.requestPath contains '/vehicles/search/by-number-of-wheels')]">
+                <set-variable variableName="from" value="#[(attributes.requestPath splitBy('/'))[7] as Number]" doc:name="Set From Variable" />
+                <set-variable variableName="to" value="#[(attributes.requestPath splitBy('/'))[8] as Number]" doc:name="Set To Variable" />
+
+                <set-variable value="#[attributes.requestPath]" doc:name="Set Variable" doc:id="c46ebc85-5799-469f-8d10-13be7ebf1828" variableName="path"/>
+				<wsc:consume doc:name="Consume" doc:id="88ec5ef9-95b9-42ba-8f8b-45db5abe9018" config-ref="Web_Service_Consumer_Config" operation="searchByNumberOfWheelsBetween">
+					<wsc:message >
+						<wsc:body ><![CDATA[#[%dw 2.0
+ns tns http://mihan.ru/
+output application/xml
+---
+{
+	tns#searchByNumberOfWheelsBetween: {
+		from: vars.from,
+		to: vars.to		
+	}
+}]]]></wsc:body>
+					</wsc:message>
+				</wsc:consume>
+				<choice doc:name="Response Handling">
+                <when expression="#[%dw 2.0&#10;ns ns0 http://mihan.ru/&#10;---&#10;(payload.body.ns0#searchByNumberOfWheelsBetweenResponse.return.status ~= 503)]">
+                        <set-variable variableName="httpStatus" value="503" doc:name="Set HTTP Status" />
+						<set-payload value="#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	timestamp: now() as String {format: &quot;yyyy-MM-dd'T'HH:mm:ss.SSSXXX&quot;},&#10;	status: 503,&#10;	error: &quot;Service Unavailable&quot;,&#10;	path: vars.path&#10;}]" doc:name="Set Payload" doc:id="13280b8e-7928-4729-a4b9-0ee22deb3690" mimeType="application/json"/>
+                </when>
+                <otherwise>
+                        <set-variable variableName="httpStatus" value="#[%dw 2.0&#10;ns ns0 http://mihan.ru/&#10;---&#10;payload.body.ns0#searchByNumberOfWheelsBetweenResponse.return.status]" doc:name="Set HTTP Status" />
+						<set-payload value='#[%dw 2.0&#10;ns ns0 http://mihan.ru/&#10;output aplication/json&#10;---&#10;read(payload.body.ns0#searchByNumberOfWheelsBetweenResponse.return.body, "application/json")]' doc:name="Set Payload" doc:id="8eb34840-aa37-47f2-862a-df6ab5f7fea1" mimeType="application/json"/>
+                </otherwise>
+                </choice>
+            </when>
+
+            <!-- Condition for PATCH /vehicles/fix-distance/{id} -->
+            <when expression="#[(attributes.method == 'PATCH') and (attributes.requestPath contains '/vehicles/fix-distance')]">
+                <set-variable variableName="id" value="#[(attributes.requestPath splitBy('/'))[6] as Number]" doc:name="Set ID Variable" />
+
+                <set-variable value="#[attributes.requestPath]" doc:name="Set Variable" doc:id="7cb6c03f-a8c7-41a2-87f9-9f268a14ce3f" variableName="path"/>
+				<wsc:consume doc:name="Consume" doc:id="7a839f47-b5d0-493c-9603-a081838c0248" config-ref="Web_Service_Consumer_Config" operation="fixDistance">
+					<wsc:message >
+						<wsc:body ><![CDATA[#[%dw 2.0
+ns tns http://mihan.ru/
+output application/xml
+---
+{
+	tns#fixDistance: {
+		id: vars.id	
+	}
+}]]]></wsc:body>
+					</wsc:message>
+				</wsc:consume>
+
+                <choice doc:name="Response Handling">
+                <when expression="#[%dw 2.0&#10;ns ns0 http://mihan.ru/&#10;---&#10;payload.body.ns0#fixDistanceResponse.return.status ~= 503]">
+                        <set-variable variableName="httpStatus" value="503" doc:name="Set HTTP Status" />
+						<set-payload value="#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	timestamp: now() as String {format: &quot;yyyy-MM-dd'T'HH:mm:ss.SSSXXX&quot;},&#10;	status: 503,&#10;	error: &quot;Service Unavailable&quot;,&#10;	path: vars.path&#10;}]" doc:name="Set Payload" doc:id="7806eaf0-da31-4668-9ac3-bbe004c25402" mimeType="application/json"/>
+                </when>
+                <otherwise>
+                        <set-variable variableName="httpStatus" value="#[%dw 2.0&#10;ns ns0 http://mihan.ru/&#10;---&#10;payload.body.ns0#fixDistanceResponse.return.status]" doc:name="Set HTTP Status" />
+						<set-payload value='#[%dw 2.0&#10;ns ns0 http://mihan.ru/&#10;output application/json&#10;---&#10;read(payload.body.ns0#fixDistanceResponse.return.body, "application/json")]' doc:name="Set Payload" doc:id="cdb724d1-d3bb-4850-87c1-e6f428072942" mimeType="application/json"/>
+                </otherwise>
+                </choice>
+            </when>
+			<otherwise>
+                <ee:transform doc:name="Set Unsupported Operation Payload" doc:id="2ef43cf5-69db-4871-acc9-84ca32bcce30">
+                    <ee:message>
+                        <ee:set-payload><![CDATA["Unsupported operation" write "text/plain"]]></ee:set-payload>
+                    </ee:message>
+                </ee:transform>
+                <set-variable variableName="httpStatus" value="400" doc:name="Set HTTP Status" />
+            </otherwise>
+        </choice>
+    </flow>
+</mule>

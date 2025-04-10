@@ -1,0 +1,14 @@
+@use "ngx-float-ui/scss/theme.scss" as floatUiBaseTheme;
+
+$color-mode-type: media-query;
+$enable-transitions: false;
+$enable-shadows: true;
+@import "bootstrap/scss/bootstrap";
+
+body {
+  @include floatUiBaseTheme.ngx-float-ui-theme($body-secondary-bg, $body-color);
+
+  @media (prefers-color-scheme: dark) {
+    @include floatUiBaseTheme.ngx-float-ui-theme($body-secondary-bg-dark, $body-color-dark);
+  }
+}
