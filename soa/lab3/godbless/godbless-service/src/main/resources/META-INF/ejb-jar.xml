@@ -1,0 +1,10 @@
+<ejb-jar xmlns="http://java.sun.com/xml/ns/javaee" version="3.0">
+    <enterprise-beans>
+        <session>
+            <ejb-name>VehicleServiceImpl</ejb-name>
+            <remote>ru.nutsalhan87.service.VehicleService</remote>
+            <ejb-class>ru.nutsalhan87.service.VehicleServiceImpl</ejb-class>
+            <session-type>Stateless</session-type>
+        </session>
+    </enterprise-beans>
+</ejb-jar>

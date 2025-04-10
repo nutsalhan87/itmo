@@ -1,0 +1,532 @@
+openapi: 3.0.0
+info:
+  title: Vehicle Management API
+  description: API для управления коллекцией объектов Vehicle
+  version: 1.2.0
+servers:
+  - url: /api/v1
+paths:
+  /vehicles:
+    get:
+      summary: Получить список всех транспортных средств
+      tags:
+        - vehicles
+      description: Возвращает массив объектов транспортных средств с поддержкой сортировки, фильтрации и постраничного вывода.
+      operationId: getVehicles
+      parameters:
+        - name: page
+          in: query
+          description: Номер страницы для вывода
+          required: false
+          explode: true
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: size
+          in: query
+          description: Размер страницы
+          required: false
+          schema:
+            type: integer
+            default: 20
+            minimum: 5
+            maximum: 100
+        - name: sort
+          in: query
+          description: |
+            Поля для сортировки. Указывать через запятую, в формате "-field" для убывающих, "field" для возрастающих. Сортировка в порядке подачи.
+            
+            Поля от схемы [VehicleAllFields](#/components/schemas/VehicleAllFields).
+          
+            Для полей координат используются названия coordinateX и coordinateY.
+            
+            Строки сортируются в лексикографическом порядке.
+          required: false
+          schema:
+            type: string
+            example: -name,creationDate
+        - name: filter
+          in: query
+          description: |
+            Условия фильтрации. Через запятую, в формате field[op]value, где op - это:
+            - = - точное соответствие поля 
+            - != - неравенство
+            - \> - поле больше значения
+            - \>= - поле больше или равно значению
+            - \< - поле меньше значения
+            - \<= - поле меньше или равно значению
+            - ~ - содержит значение (строго для строк)
+            
+            Если поле строковое, то происходит проверка в лексикографическом порядке.
+            
+            Для полей координат используются названия coordinateX и coordinateY.
+            
+            Поля от схемы [VehicleAllFields](#/components/schemas/VehicleAllFields).
+            
+          required: false
+          schema:
+            type: string
+            example: creationDate>=2007-12-03,name=Toyota
+      responses:
+        '200':
+          description: Успешная операция
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalPages:
+                    description: Общее количество страниц на основе параметра "size"
+                    type: integer
+                    example: 1
+                  vehicles:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: '#/components/schemas/VehicleAllFields'
+                        - required:
+                          - id
+                          - name
+                          - coordinates
+                          - creationDate
+                          - enginePower
+                          - type
+                required:
+                  - totalPages
+                  - vehicles
+        '400':
+          description: Некорректные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestAnswer'
+        '500':
+          description: Внутренняя ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+                  
+    post:
+      summary: Добавить новое транспортное средство
+      tags:
+        - vehicles
+      description: Создает новый объект транспортного средства и возвращает его id с временем создания.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleUserSetFieldsExistedRestricted'
+      responses:
+        '201':
+          description: Идентификатор и время создания
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/VehicleId'
+                  creationDate:
+                    $ref: '#/components/schemas/VehicleCreationDate'
+                required:
+                  - id
+                  - creationDate
+        '400':
+          description: Некорректные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestAnswer'
+        '422':
+          description: Данные не прошли валидацию
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongPropertiesAnswer'
+        '500':
+          description: Внутренняя ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+
+  /vehicles/{id}:
+    put:
+      summary: Обновить транспортное средство по id
+      tags:
+        - vehicles
+      description: Обновляет информацию о транспортном средстве по заданному id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/VehicleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleUserSetFieldsExistedRestricted'
+      responses:
+        '200':
+          description: Успешно обновлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleAllFieldsNoIdExistedRestricted'
+        '400':
+          description: Некорректные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestAnswer'
+        '404':
+          description: Транспортное средство с указанным id не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleNotFoundAnswer'
+        '422':
+          description: Данные не прошли валидацию
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongPropertiesAnswer'
+        '500':
+          description: Внутренняя ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+    delete:
+      summary: Удалить транспортное средство по id
+      tags:
+        - vehicles
+      description: Удаляет транспортное средство по заданному id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/VehicleId'
+      responses:
+        '204':
+          description: Успешно удалено
+        '400':
+          description: Некорректные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestAnswer'
+        '404':
+          description: Транспортное средство с указанным id не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleNotFoundAnswer'
+        '422':
+          description: Данные не прошли валидацию
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongPropertiesAnswer'
+        '500':
+          description: Внутренняя ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+
+  /vehicles/any-with-distance/{distance}:
+    delete:
+      summary: Удалить одно транспортное средство по пробегу
+      tags:
+        - vehicles
+      description: Удаляет одно транспортное средство, значение поля `distanceTravelled` которого равно заданному.
+      parameters:
+        - name: distance
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/VehicleDistanceTravelled'
+      responses:
+        '204':
+          description: Успешно удалено
+        '400':
+          description: Некорректные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestAnswer'
+        '422':
+          description: Данные не прошли валидацию
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongPropertiesAnswer'
+        '404':
+          description: Транспортное средство не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleNotFoundAnswer'
+        '500':
+          description: Внутренняя ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+                    
+  /vehicle-types:
+    get:
+      summary: Получить все типы транспортного средства
+      tags:
+        - vehicles
+      responses:
+        '200':
+          description: Массив значений [VehicleType](#/components/schemas/VehicleType).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleType'
+        '500':
+          description: Внутренняя ошибка на стороне сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorAnswer'
+              
+components:
+  schemas:
+    VehicleUserSetFields:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/VehicleName'
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        enginePower:
+          $ref: '#/components/schemas/VehicleEnginePower'
+        numberOfWheels:
+          $ref: '#/components/schemas/VehicleNumberOfWheels'
+        distanceTravelled:
+          $ref: '#/components/schemas/VehicleDistanceTravelled'
+        type:
+          $ref: '#/components/schemas/VehicleType'
+    
+    VehicleUserSetFieldsExistedRestricted:
+      allOf:
+        - $ref: '#/components/schemas/VehicleUserSetFields'
+        - required:
+          - name
+          - coordinates
+          - enginePower
+          - numberOfWheels
+          - distanceTravelled
+          - type
+    
+    VehicleAllFieldsNoId:
+      allOf:
+        - type: object
+          properties:
+            creationDate:
+              $ref: '#/components/schemas/VehicleCreationDate'
+        - $ref: '#/components/schemas/VehicleUserSetFields'
+    
+    VehicleAllFieldsNoIdExistedRestricted:
+      allOf:
+        - $ref: '#/components/schemas/VehicleAllFieldsNoId'
+        - required:
+          - name
+          - coordinates
+          - creationDate
+          - enginePower
+          - numberOfWheels
+          - distanceTravelled
+          - type
+    
+    VehicleAllFields:
+      allOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/VehicleId'
+            creationDate:
+              $ref: '#/components/schemas/VehicleCreationDate'
+        - $ref: '#/components/schemas/VehicleUserSetFields'
+        
+    VehicleAllFieldsExistedRestricted:
+      allOf:
+        - $ref: '#/components/schemas/VehicleAllFields'
+        - required:
+          - id
+          - name
+          - coordinates
+          - creationDate
+          - enginePower
+          - numberOfWheels
+          - distanceTravelled
+          - type
+    
+    VehicleId:
+      description: Уникальный идентификатор транспортного средства
+      type: number
+      format: int64
+      minimum: 1
+      example: 123
+    
+    VehicleName: 
+      description: Название транспортного средства
+      type: string
+      minLength: 1
+      example: Kia Rio
+    
+    Coordinates:
+      type: object
+      properties:
+        x:
+          $ref: '#/components/schemas/CoordinateX'
+        y:
+          $ref: '#/components/schemas/CoordinateY'
+      required: 
+        - x
+        - y
+    
+    VehicleCreationDate:
+      description: Дата создания транспортного средства
+      type: string
+      format: yyyy-MM-dd
+      example: 2007-12-03
+    
+    VehicleEnginePower:
+      description: Сила мотора транспортного средства в лошадиных силах
+      type: number
+      format: int32
+      minimum: 1
+      example: 200
+    
+    VehicleDistanceTravelled:
+      description: Кол-во километров, которое преодолело транспортное средство в километрах (пробег)
+      type: number
+      format: int32
+      minimum: 1
+      example: 11003
+    
+    VehicleNumberOfWheels:
+      description: Кол-во колес у транспортного средства
+      type: number
+      example: 4
+    
+    VehicleType:
+      type: string
+      description: Тип транспортного средства
+      enum:
+        - HELICOPTER
+        - DRONE
+        - SHIP
+        - BICYCLE
+        - CHOPPER
+    
+    CoordinateX:
+      description: Координата X
+      type: number
+      format: float64
+      example: 31412
+    
+    CoordinateY:
+      description: Координата Y
+      type: number
+      format: float64
+      maximum: 126
+      example: 100
+    
+    WrongPropertiesAnswer:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+          example: 2024-10-13T19:49:21.062+00:00
+        status:
+          type: number
+          example: 422
+        error:
+          type: string
+          example: Internal Server Error
+        path:
+          type: string
+          example: /vehicles
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field: 
+                type: string
+                example: id
+              value:
+                type: string
+                example: Id должен быть больше 0
+    
+    BadRequestAnswer:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+          example: 2024-10-13T19:49:21.062+00:00
+        status:
+          type: number
+          enum: 
+            - 400
+        error:
+          type: string
+          example: Bad Request
+        path:
+          type: string
+          example: /vehicles
+          
+    VehicleNotFoundAnswer:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+          example: 2024-10-13T19:49:21.062+00:00
+        status:
+          type: number
+          enum: 
+            - 404
+        error:
+          type: string
+          example: Not Found
+        path:
+          type: string
+          example: /vehicles
+        details:
+          type: string
+          example: Транспортного средства с таким id не найдено
+    
+    ServerErrorAnswer:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+          example: 2024-10-13T19:49:21.062+00:00
+        status:
+          type: string
+          pattern: 5\d\d
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        path:
+          type: string
+          example: /vehicles

@@ -1,0 +1,22 @@
+<div class="row mt-2 mx-1 gy-3">
+    <div class="col-12 vstack p-3 gap-3 border rounded">
+        <span class="h3">Сброс пробега транспортного средства</span>
+        <div class="input-group">
+            <input type="number" class="form-control" [class.is-invalid]="id.invalid" [formControl]="id">
+            <button class="btn border">
+                <app-info [body]="tcav.id.helperMessage"></app-info>
+            </button>
+        </div>
+        <button class="btn btn-primary ms-auto" (click)="fixDistance()" [disabled]="!id.valid">Сбросить пробег</button>
+    </div>
+    <div class="col-12 vstack p-3 gap-3 border rounded">
+        <span class="h3">Удаление любого транспортного средства по пробегу</span>
+        <div class="input-group">
+            <input type="number" class="form-control" [class.is-invalid]="distanceTravelled.invalid" [formControl]="distanceTravelled">
+            <button class="btn border">
+                <app-info [body]="tcav.distanceTravelled.helperMessage"></app-info>
+            </button>
+        </div>
+        <button class="btn btn-primary ms-auto" (click)="deleteByDistance()" [disabled]="!distanceTravelled.valid">Удалить</button>
+    </div>
+</div>

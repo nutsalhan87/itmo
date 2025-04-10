@@ -1,0 +1,13 @@
+@for (notification of notifications; track notification[0].id; let i = $index) {
+<div class="toast show">
+    <div class="toast-header">
+        <strong class="me-auto">{{ notification[0].header }}</strong>
+        <button type="button" class="btn-close" (click)="deleteNotification(i)"></button>
+    </div>
+    @if (notification[0].body) {
+    <div class="toast-body" [style.white-space]="'pre-line'">
+        {{ notification[0].body }}
+    </div>
+    }
+</div>
+}
